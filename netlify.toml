@@ -1,5 +1,6 @@
 [build]
-  publish = "dist/client"
+  publish = "dist"
 
 [functions]
-  directory = ".netlify/functions-internal"
+  directory = "netlify/functions"
+
