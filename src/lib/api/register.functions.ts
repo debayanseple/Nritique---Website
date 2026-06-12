@@ -24,6 +24,13 @@ const registerSchema = z.discriminatedUnion("type", [
     date: z.string().optional(),
     format: z.string().optional(),
   }),
+  z.object({
+    type: z.literal("enquiry"),
+    name: z.string().min(1, "Name is required"),
+    email: z.string().email("Invalid email address"),
+    phone: z.string().min(1, "Phone number is required"),
+    message: z.string().min(1, "Message is required"),
+  }),
 ]);
 
 export type RegistrationInput = z.infer<typeof registerSchema>;

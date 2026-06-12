@@ -1,16 +1,42 @@
 import { useState, type FormEvent } from "react";
 import { motion } from "framer-motion";
 import { MapPin, Phone, Mail, MessageCircle } from "lucide-react";
+import { submitRegistration } from "../lib/api/register.functions";
 
 export function Contact() {
   const [form, setForm] = useState({ name: "", email: "", phone: "", message: "" });
   const [sent, setSent] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
-  const submit = (e: FormEvent) => {
+  const submit = async (e: FormEvent) => {
     e.preventDefault();
-    setSent(true);
-    setForm({ name: "", email: "", phone: "", message: "" });
-    setTimeout(() => setSent(false), 4000);
+    setIsSubmitting(true);
+    setError(null);
+    try {
+      const res = await submitRegistration({
+        data: {
+          type: "enquiry",
+          name: form.name,
+          email: form.email,
+          phone: form.phone,
+          message: form.message,
+        },
+      });
+
+      if (res.success) {
+        setSent(true);
+        setForm({ name: "", email: "", phone: "", message: "" });
+        setTimeout(() => setSent(false), 4000);
+      } else {
+        setError(res.error || "Failed to send enquiry. Please try again.");
+      }
+    } catch (err: unknown) {
+      console.error("Enquiry submission error:", err);
+      setError("An unexpected error occurred. Please try again.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -78,17 +104,29 @@ export function Contact() {
             transition={{ duration: 0.6 }}
             className="bg-card border border-border rounded-xl p-7 space-y-4"
           >
-            <Field label="Name" value={form.name} onChange={(v) => setForm({ ...form, name: v })} />
+            {error && (
+              <div className="p-3 text-xs bg-red-50 text-red-600 rounded-md border border-red-200 font-medium">
+                {error}
+              </div>
+            )}
+            <Field 
+              label="Name" 
+              value={form.name} 
+              onChange={(v) => setForm({ ...form, name: v })} 
+              disabled={isSubmitting}
+            />
             <Field
               label="Email"
               type="email"
               value={form.email}
               onChange={(v) => setForm({ ...form, email: v })}
+              disabled={isSubmitting}
             />
             <Field
               label="Phone"
               value={form.phone}
               onChange={(v) => setForm({ ...form, phone: v })}
+              disabled={isSubmitting}
             />
             <div>
               <label className="block text-xs uppercase tracking-wider text-charcoal/70 mb-1">
@@ -98,15 +136,17 @@ export function Contact() {
                 required
                 rows={4}
                 value={form.message}
+                disabled={isSubmitting}
                 onChange={(e) => setForm({ ...form, message: e.target.value })}
-                className="w-full rounded-md border border-input bg-background px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-gold"
+                className="w-full rounded-md border border-input bg-background px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-gold disabled:opacity-50"
               />
             </div>
             <button
               type="submit"
-              className="w-full rounded-md bg-burgundy text-cream py-3 font-semibold hover:bg-burgundy/90 transition"
+              disabled={isSubmitting}
+              className="w-full rounded-md bg-burgundy text-cream py-3 font-semibold hover:bg-burgundy/90 transition disabled:opacity-50 flex items-center justify-center gap-2"
             >
-              Send Enquiry
+              {isSubmitting ? "Sending..." : "Send Enquiry"}
             </button>
             {sent && (
               <p className="text-sm text-burgundy text-center">
@@ -125,11 +165,13 @@ function Field({
   value,
   onChange,
   type = "text",
+  disabled = false,
 }: {
   label: string;
   value: string;
   onChange: (v: string) => void;
   type?: string;
+  disabled?: boolean;
 }) {
   return (
     <div>
@@ -140,8 +182,9 @@ function Field({
         required
         type={type}
         value={value}
+        disabled={disabled}
         onChange={(e) => onChange(e.target.value)}
-        className="w-full rounded-md border border-input bg-background px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-gold"
+        className="w-full rounded-md border border-input bg-background px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-gold disabled:opacity-50"
       />
     </div>
   );
