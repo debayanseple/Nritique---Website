@@ -8,9 +8,17 @@ export const Route = createFileRoute("/classes")({
   head: () => ({
     meta: [
       { title: "Classes — Nritya Dance Academy | Kathak & Semi-Classical, Kolkata" },
-      { name: "description", content: "Weekly batches in Kathak and Semi-Classical dance for ages 4 through adult. Find the right class for your dancer at Nritya, Kolkata." },
+      {
+        name: "description",
+        content:
+          "Weekly batches in Kathak and Semi-Classical dance for ages 4 through adult. Find the right class for your dancer at Nritya, Kolkata.",
+      },
       { property: "og:title", content: "Classes at Nritya Dance Academy" },
-      { property: "og:description", content: "From Little Stars to Adult batches — disciplined, joyful Kathak training rooted in tradition." },
+      {
+        property: "og:description",
+        content:
+          "From Little Stars to Adult batches — disciplined, joyful Kathak training rooted in tradition.",
+      },
     ],
   }),
   component: ClassesPage,

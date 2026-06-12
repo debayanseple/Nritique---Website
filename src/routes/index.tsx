@@ -13,9 +13,16 @@ export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
       { title: "Nritya Dance Academy — Kathak & Semi-Classical, Kolkata" },
-      { name: "description", content: "Kathak & Semi-Classical dance classes for all ages in Kolkata. Workshops, batches, and stage training rooted in tradition." },
+      {
+        name: "description",
+        content:
+          "Kathak & Semi-Classical dance classes for all ages in Kolkata. Workshops, batches, and stage training rooted in tradition.",
+      },
       { property: "og:title", content: "Nritya Dance Academy" },
-      { property: "og:description", content: "Where tradition meets expression — classes & workshops for every age." },
+      {
+        property: "og:description",
+        content: "Where tradition meets expression — classes & workshops for every age.",
+      },
     ],
   }),
   component: Index,
@@ -82,7 +89,9 @@ function Index() {
                 <Link
                   to={t.to}
                   className={`mt-6 inline-flex items-center gap-2 font-semibold border-b ${
-                    t.tint === "text-cream" ? "border-gold text-gold" : "border-burgundy text-burgundy"
+                    t.tint === "text-cream"
+                      ? "border-gold text-gold"
+                      : "border-burgundy text-burgundy"
                   } pb-0.5 hover:gap-3 transition-all`}
                 >
                   {t.cta} <ArrowRight size={16} />

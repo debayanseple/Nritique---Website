@@ -28,8 +28,8 @@ export function Footer() {
               NUPUR <span className="text-[#c9a84c]">✦</span> KATHAK
             </h3>
             <p className="text-sm leading-relaxed">
-              A Kathak &amp; semi-classical academy in Andheri West, Mumbai —
-              teaching the Lucknow gharana with care since 2009.
+              A Kathak &amp; semi-classical academy in Andheri West, Mumbai — teaching the Lucknow
+              gharana with care since 2009.
             </p>
             <div className="flex gap-3 mt-5">
               <a href="#" aria-label="Instagram" className="hover:text-[#c9a84c] transition">
@@ -52,11 +52,7 @@ export function Footer() {
             <ul className="space-y-2 text-sm">
               {exploreLinks.map((l) => (
                 <li key={l.label}>
-                  <Link
-                    to={l.to}
-                    hash={l.hash}
-                    className="hover:text-[#c9a84c] transition"
-                  >
+                  <Link to={l.to} hash={l.hash} className="hover:text-[#c9a84c] transition">
                     {l.label}
                   </Link>
                 </li>

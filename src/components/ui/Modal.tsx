@@ -40,7 +40,11 @@ export function Modal({ open, onClose, title, children }: ModalProps) {
           >
             <div className="flex items-start justify-between border-b border-border px-6 py-4">
               <h3 className="text-xl text-burgundy">{title}</h3>
-              <button onClick={onClose} aria-label="Close" className="text-muted-foreground hover:text-foreground">
+              <button
+                onClick={onClose}
+                aria-label="Close"
+                className="text-muted-foreground hover:text-foreground"
+              >
                 <X size={20} />
               </button>
             </div>

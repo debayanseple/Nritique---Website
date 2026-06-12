@@ -61,9 +61,7 @@ export function Gallery() {
           className="text-center mb-14"
         >
           <span className="text-gold uppercase tracking-[0.3em] text-xs">In Frame</span>
-          <h2 className="font-display text-4xl md:text-5xl text-burgundy mt-3">
-            Workshop Moments
-          </h2>
+          <h2 className="font-display text-4xl md:text-5xl text-burgundy mt-3">Workshop Moments</h2>
           <Ornament className="mt-5" />
         </motion.div>
       </div>

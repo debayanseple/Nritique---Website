@@ -78,9 +78,16 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
       { title: "Nritya Dance Academy — Kathak & Semi-Classical" },
-      { name: "description", content: "Kathak & Semi-Classical Dance Academy in Kolkata — classes for all ages, workshops and performances." },
+      {
+        name: "description",
+        content:
+          "Kathak & Semi-Classical Dance Academy in Kolkata — classes for all ages, workshops and performances.",
+      },
       { property: "og:title", content: "Nritya Dance Academy" },
-      { property: "og:description", content: "Where tradition meets expression — Kathak & Semi-Classical classes for all ages." },
+      {
+        property: "og:description",
+        content: "Where tradition meets expression — Kathak & Semi-Classical classes for all ages.",
+      },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
     ],
@@ -88,7 +95,10 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { rel: "stylesheet", href: appCss },
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
-      { rel: "stylesheet", href: "https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&family=Inter:wght@400;500;600&family=Tiro+Bangla:ital@0;1&family=Noto+Serif+Bengali:wght@500;600&display=swap" },
+      {
+        rel: "stylesheet",
+        href: "https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&family=Inter:wght@400;500;600&family=Tiro+Bangla:ital@0;1&family=Noto+Serif+Bengali:wght@500;600&display=swap",
+      },
     ],
   }),
   shellComponent: RootShell,

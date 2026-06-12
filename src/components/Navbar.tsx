@@ -54,7 +54,9 @@ export function Navbar() {
           <span style={{ fontFamily: '"Tiro Bangla", serif' }} className="text-gold text-base">
             নৃত্য
           </span>
-          <span>Nritya<span className="text-gold">.</span></span>
+          <span>
+            Nritya<span className="text-gold">.</span>
+          </span>
         </Link>
 
         <ul className="hidden md:flex items-center gap-7">

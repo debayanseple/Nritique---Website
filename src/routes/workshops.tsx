@@ -8,9 +8,16 @@ export const Route = createFileRoute("/workshops")({
   head: () => ({
     meta: [
       { title: "Workshops — Nritya Dance Academy | Kathak Intensives & Online" },
-      { name: "description", content: "Seasonal Kathak & Semi-Classical workshops — abhinaya, taal labs, and choreography intensives. Online and in-studio in Kolkata." },
+      {
+        name: "description",
+        content:
+          "Seasonal Kathak & Semi-Classical workshops — abhinaya, taal labs, and choreography intensives. Online and in-studio in Kolkata.",
+      },
       { property: "og:title", content: "Workshops at Nritya Dance Academy" },
-      { property: "og:description", content: "Reserve your spot in our upcoming Kathak workshops — both online and in-studio." },
+      {
+        property: "og:description",
+        content: "Reserve your spot in our upcoming Kathak workshops — both online and in-studio.",
+      },
     ],
   }),
   component: WorkshopsPage,

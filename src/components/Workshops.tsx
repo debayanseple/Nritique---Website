@@ -18,9 +18,42 @@ export interface Workshop {
 }
 
 const initial: Workshop[] = [
-  { id: "w1", title: "Abhinaya Intensive", style: "Kathak", date: "July 12, 2026", format: "Offline", fee: 1800, seatsTotal: 25, seatsLeft: 7, color: "#6B1E2A", poster: "/images/workshops/abhinaya-intensive.png" },
-  { id: "w2", title: "Rhythm & Taal Lab", style: "Semi-Classical", date: "July 26, 2026", format: "Online", fee: 900, seatsTotal: 40, seatsLeft: 18, color: "#C9A84C", poster: "/images/workshops/Rhythm & Taal Lab.png" },
-  { id: "w3", title: "Monsoon Choreography", style: "Odissi-influenced", date: "August 09, 2026", format: "Offline", fee: 2200, seatsTotal: 20, seatsLeft: 4, color: "#1C1C1E", poster: "/images/workshops/Monsoon Choreography.png" },
+  {
+    id: "w1",
+    title: "Abhinaya Intensive",
+    style: "Kathak",
+    date: "July 12, 2026",
+    format: "Offline",
+    fee: 1800,
+    seatsTotal: 25,
+    seatsLeft: 7,
+    color: "#6B1E2A",
+    poster: "/images/workshops/abhinaya-intensive.png",
+  },
+  {
+    id: "w2",
+    title: "Rhythm & Taal Lab",
+    style: "Semi-Classical",
+    date: "July 26, 2026",
+    format: "Online",
+    fee: 900,
+    seatsTotal: 40,
+    seatsLeft: 18,
+    color: "#C9A84C",
+    poster: "/images/workshops/Rhythm & Taal Lab.png",
+  },
+  {
+    id: "w3",
+    title: "Monsoon Choreography",
+    style: "Odissi-influenced",
+    date: "August 09, 2026",
+    format: "Offline",
+    fee: 2200,
+    seatsTotal: 20,
+    seatsLeft: 4,
+    color: "#1C1C1E",
+    poster: "/images/workshops/Monsoon Choreography.png",
+  },
 ];
 
 const tabs = ["All", "Upcoming", "Online", "Offline"] as const;
@@ -36,7 +69,9 @@ export function Workshops() {
   }, [tab, workshops]);
 
   const reserve = (id: string) => {
-    setWorkshops((ws) => ws.map((w) => (w.id === id && w.seatsLeft > 0 ? { ...w, seatsLeft: w.seatsLeft - 1 } : w)));
+    setWorkshops((ws) =>
+      ws.map((w) => (w.id === id && w.seatsLeft > 0 ? { ...w, seatsLeft: w.seatsLeft - 1 } : w)),
+    );
   };
 
   return (
@@ -50,7 +85,9 @@ export function Workshops() {
           className="text-center mb-12"
         >
           <span className="text-gold uppercase tracking-[0.3em] text-xs">This Season</span>
-          <h2 className="font-display text-4xl md:text-5xl text-burgundy mt-3">Upcoming Workshops</h2>
+          <h2 className="font-display text-4xl md:text-5xl text-burgundy mt-3">
+            Upcoming Workshops
+          </h2>
           <Ornament className="mt-5" />
         </motion.div>
 
@@ -78,10 +115,7 @@ export function Workshops() {
               transition={{ delay: i * 0.08, duration: 0.6 }}
               className="rounded-xl bg-card border border-border overflow-hidden flex flex-col"
             >
-              <div
-                className="aspect-[4/3] overflow-hidden"
-                style={{ backgroundColor: w.color }}
-              >
+              <div className="aspect-[4/3] overflow-hidden" style={{ backgroundColor: w.color }}>
                 {w.poster ? (
                   <img
                     src={w.poster}
@@ -96,10 +130,14 @@ export function Workshops() {
               </div>
               <div className="p-6 flex flex-col flex-1">
                 <div className="flex items-center justify-between mb-2">
-                  <span className="text-xs uppercase tracking-wider text-burgundy font-semibold">{w.style}</span>
+                  <span className="text-xs uppercase tracking-wider text-burgundy font-semibold">
+                    {w.style}
+                  </span>
                   <span
                     className={`text-xs rounded-full px-2 py-0.5 ${
-                      w.format === "Online" ? "bg-gold/20 text-charcoal" : "bg-burgundy/10 text-burgundy"
+                      w.format === "Online"
+                        ? "bg-gold/20 text-charcoal"
+                        : "bg-burgundy/10 text-burgundy"
                     }`}
                   >
                     {w.format}
@@ -107,9 +145,15 @@ export function Workshops() {
                 </div>
                 <h3 className="font-display text-xl text-charcoal">{w.title}</h3>
                 <div className="mt-3 space-y-1 text-sm text-muted-foreground">
-                  <p className="flex items-center gap-2"><Calendar size={14} /> {w.date}</p>
-                  <p className="flex items-center gap-2"><MapPin size={14} /> {w.format === "Online" ? "Zoom" : "Studio · Kolkata"}</p>
-                  <p className="flex items-center gap-2"><Users size={14} /> {w.seatsLeft} seats left</p>
+                  <p className="flex items-center gap-2">
+                    <Calendar size={14} /> {w.date}
+                  </p>
+                  <p className="flex items-center gap-2">
+                    <MapPin size={14} /> {w.format === "Online" ? "Zoom" : "Studio · Kolkata"}
+                  </p>
+                  <p className="flex items-center gap-2">
+                    <Users size={14} /> {w.seatsLeft} seats left
+                  </p>
                 </div>
                 <div className="mt-5 flex items-center justify-between">
                   <span className="font-display text-2xl text-burgundy">₹{w.fee}</span>
@@ -127,13 +171,20 @@ export function Workshops() {
         </div>
 
         <div className="text-center mt-10">
-          <a href="#" className="text-burgundy underline-offset-4 hover:underline text-sm font-medium">
+          <a
+            href="#"
+            className="text-burgundy underline-offset-4 hover:underline text-sm font-medium"
+          >
             View Past Workshops →
           </a>
         </div>
       </div>
 
-      <WorkshopRegisterModal workshop={selected} onClose={() => setSelected(null)} onReserve={reserve} />
+      <WorkshopRegisterModal
+        workshop={selected}
+        onClose={() => setSelected(null)}
+        onReserve={reserve}
+      />
     </section>
   );
 }

@@ -53,9 +53,18 @@ export function Mandala({ className = "", size = 320 }: { className?: string; si
 }
 
 /** Small Devanagari accent — "নৃত্য" (Nritya / Dance). */
-export function SanskritAccent({ children = "নৃত্য", className = "" }: { children?: string; className?: string }) {
+export function SanskritAccent({
+  children = "নৃত্য",
+  className = "",
+}: {
+  children?: string;
+  className?: string;
+}) {
   return (
-    <span className={`font-devanagari text-gold ${className}`} style={{ fontFamily: '"Tiro Bangla", serif' }}>
+    <span
+      className={`font-devanagari text-gold ${className}`}
+      style={{ fontFamily: '"Tiro Bangla", serif' }}
+    >
       {children}
     </span>
   );

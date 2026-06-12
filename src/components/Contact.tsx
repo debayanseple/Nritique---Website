@@ -40,7 +40,9 @@ export function Contact() {
               <div>
                 <h4 className="font-semibold text-charcoal">Studio Address</h4>
                 <p className="text-muted-foreground text-sm mt-1">
-                  142, Rabindra Sarani, Hindustan Park<br />Kolkata, West Bengal 700029
+                  142, Rabindra Sarani, Hindustan Park
+                  <br />
+                  Kolkata, West Bengal 700029
                 </p>
               </div>
             </div>
@@ -77,10 +79,21 @@ export function Contact() {
             className="bg-card border border-border rounded-xl p-7 space-y-4"
           >
             <Field label="Name" value={form.name} onChange={(v) => setForm({ ...form, name: v })} />
-            <Field label="Email" type="email" value={form.email} onChange={(v) => setForm({ ...form, email: v })} />
-            <Field label="Phone" value={form.phone} onChange={(v) => setForm({ ...form, phone: v })} />
+            <Field
+              label="Email"
+              type="email"
+              value={form.email}
+              onChange={(v) => setForm({ ...form, email: v })}
+            />
+            <Field
+              label="Phone"
+              value={form.phone}
+              onChange={(v) => setForm({ ...form, phone: v })}
+            />
             <div>
-              <label className="block text-xs uppercase tracking-wider text-charcoal/70 mb-1">Message</label>
+              <label className="block text-xs uppercase tracking-wider text-charcoal/70 mb-1">
+                Message
+              </label>
               <textarea
                 required
                 rows={4}
@@ -95,7 +108,11 @@ export function Contact() {
             >
               Send Enquiry
             </button>
-            {sent && <p className="text-sm text-burgundy text-center">Thank you — we'll reply within 24 hours.</p>}
+            {sent && (
+              <p className="text-sm text-burgundy text-center">
+                Thank you — we'll reply within 24 hours.
+              </p>
+            )}
           </motion.form>
         </div>
       </div>
@@ -103,10 +120,22 @@ export function Contact() {
   );
 }
 
-function Field({ label, value, onChange, type = "text" }: { label: string; value: string; onChange: (v: string) => void; type?: string }) {
+function Field({
+  label,
+  value,
+  onChange,
+  type = "text",
+}: {
+  label: string;
+  value: string;
+  onChange: (v: string) => void;
+  type?: string;
+}) {
   return (
     <div>
-      <label className="block text-xs uppercase tracking-wider text-charcoal/70 mb-1">{label}</label>
+      <label className="block text-xs uppercase tracking-wider text-charcoal/70 mb-1">
+        {label}
+      </label>
       <input
         required
         type={type}

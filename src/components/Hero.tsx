@@ -5,7 +5,10 @@ import { Mandala, Ornament } from "./Ornament";
 
 export function Hero() {
   return (
-    <section id="hero" className="relative min-h-screen flex items-center justify-center overflow-hidden">
+    <section
+      id="hero"
+      className="relative min-h-screen flex items-center justify-center overflow-hidden"
+    >
       {/* Video placeholder + mandala watermarks */}
       <div className="absolute inset-0 bg-charcoal">
         <div className="absolute inset-0 flex items-center justify-center opacity-10">
@@ -40,8 +43,8 @@ export function Hero() {
         </h1>
         <Ornament className="my-7" />
         <p className="text-cream/80 text-base sm:text-lg max-w-xl mx-auto leading-relaxed">
-          A gurukul-rooted academy of Kathak &amp; Semi-Classical dance — taught with reverence for the
-          tradition and the freedom of every dancer's voice.
+          A gurukul-rooted academy of Kathak &amp; Semi-Classical dance — taught with reverence for
+          the tradition and the freedom of every dancer's voice.
         </p>
         <div className="mt-10 flex flex-col sm:flex-row gap-4 justify-center">
           <Link

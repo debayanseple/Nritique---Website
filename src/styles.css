@@ -42,10 +42,10 @@
 :root {
   --radius: 0.5rem;
 
-  --burgundy: #6B1E2A;
-  --gold: #C9A84C;
-  --cream: #FAF7F2;
-  --charcoal: #1C1C1E;
+  --burgundy: #6b1e2a;
+  --gold: #c9a84c;
+  --cream: #faf7f2;
+  --charcoal: #1c1c1e;
 
   --background: var(--cream);
   --foreground: var(--charcoal);
@@ -69,21 +69,34 @@
 }
 
 @layer base {
-  * { border-color: var(--color-border); }
-  html { scroll-behavior: smooth; }
+  * {
+    border-color: var(--color-border);
+  }
+  html {
+    scroll-behavior: smooth;
+  }
   body {
     background-color: var(--color-background);
     color: var(--color-foreground);
     font-family: var(--font-sans);
   }
-  h1, h2, h3, h4, h5 { font-family: var(--font-display); }
+  h1,
+  h2,
+  h3,
+  h4,
+  h5 {
+    font-family: var(--font-display);
+  }
 }
 
 @keyframes marquee {
-  from { transform: translateX(0); }
-  to { transform: translateX(-50%); }
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
 }
 .animate-marquee {
   animation: marquee 40s linear infinite;
 }
-

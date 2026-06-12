@@ -13,11 +13,47 @@ export interface Batch {
 }
 
 const batches: Batch[] = [
-  { id: "little-stars", name: "Little Stars", ageGroup: "Ages 4–7", description: "Introductory movement, rhythm games, basic mudras and stage confidence in a playful environment.", schedule: "Sat & Sun · 10:00 – 11:00 AM", color: "#C9A84C" },
-  { id: "junior", name: "Junior Batch", ageGroup: "Ages 8–12", description: "Kathak foundations — taal, tukde, basic compositions and posture discipline.", schedule: "Mon, Wed, Fri · 5:00 – 6:30 PM", color: "#6B1E2A" },
-  { id: "teen", name: "Teen Batch", ageGroup: "Ages 13–17", description: "Kathak plus semi-classical, chakkar training, abhinaya and stage repertoire.", schedule: "Tue & Thu · 6:00 – 7:30 PM", color: "#1C1C1E" },
-  { id: "adult", name: "Adult Batch", ageGroup: "Ages 18+", description: "Both styles at a self-paced rhythm, technique refinement and stage prep.", schedule: "Sat · 7:00 – 8:30 PM", color: "#8B5A2B" },
-  { id: "semi", name: "Semi-Classical Courses", ageGroup: "All Ages", description: "Short-format Odissi-influenced choreography and seasonal thematic pieces.", schedule: "8-week cohorts · See website", color: "#C9A84C" },
+  {
+    id: "little-stars",
+    name: "Little Stars",
+    ageGroup: "Ages 4–7",
+    description:
+      "Introductory movement, rhythm games, basic mudras and stage confidence in a playful environment.",
+    schedule: "Sat & Sun · 10:00 – 11:00 AM",
+    color: "#C9A84C",
+  },
+  {
+    id: "junior",
+    name: "Junior Batch",
+    ageGroup: "Ages 8–12",
+    description: "Kathak foundations — taal, tukde, basic compositions and posture discipline.",
+    schedule: "Mon, Wed, Fri · 5:00 – 6:30 PM",
+    color: "#6B1E2A",
+  },
+  {
+    id: "teen",
+    name: "Teen Batch",
+    ageGroup: "Ages 13–17",
+    description: "Kathak plus semi-classical, chakkar training, abhinaya and stage repertoire.",
+    schedule: "Tue & Thu · 6:00 – 7:30 PM",
+    color: "#1C1C1E",
+  },
+  {
+    id: "adult",
+    name: "Adult Batch",
+    ageGroup: "Ages 18+",
+    description: "Both styles at a self-paced rhythm, technique refinement and stage prep.",
+    schedule: "Sat · 7:00 – 8:30 PM",
+    color: "#8B5A2B",
+  },
+  {
+    id: "semi",
+    name: "Semi-Classical Courses",
+    ageGroup: "All Ages",
+    description: "Short-format Odissi-influenced choreography and seasonal thematic pieces.",
+    schedule: "8-week cohorts · See website",
+    color: "#C9A84C",
+  },
 ];
 
 const fade = {
@@ -42,7 +78,8 @@ export function Classes() {
           <h2 className="font-display text-4xl md:text-5xl text-burgundy mt-3">Our Classes</h2>
           <Ornament className="mt-5" />
           <p className="text-muted-foreground mt-5 max-w-xl mx-auto">
-            Five thoughtfully designed batches that nurture every dancer — from first steps to seasoned stage.
+            Five thoughtfully designed batches that nurture every dancer — from first steps to
+            seasoned stage.
           </p>
         </motion.div>
 
@@ -67,7 +104,9 @@ export function Classes() {
                 <span className="h-px flex-1 ml-4 bg-border" />
               </div>
               <h3 className="font-display text-2xl text-charcoal">{b.name}</h3>
-              <p className="text-muted-foreground mt-2 text-sm leading-relaxed flex-1">{b.description}</p>
+              <p className="text-muted-foreground mt-2 text-sm leading-relaxed flex-1">
+                {b.description}
+              </p>
               <p className="mt-4 text-xs text-burgundy uppercase tracking-wider">{b.schedule}</p>
               <button
                 onClick={() => setSelected(b)}
