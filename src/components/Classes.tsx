@@ -65,7 +65,7 @@ export function Classes() {
   const [selected, setSelected] = useState<Batch | null>(null);
 
   return (
-    <section id="classes" className="py-24 px-5 lg:px-10 bg-cream">
+    <section id="classes" className="py-16 sm:py-24 px-4 sm:px-5 lg:px-10 bg-cream">
       <div className="max-w-6xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -75,7 +75,7 @@ export function Classes() {
           className="text-center mb-16"
         >
           <span className="text-gold uppercase tracking-[0.3em] text-xs">Curriculum</span>
-          <h2 className="font-display text-4xl md:text-5xl text-burgundy mt-3">Our Classes</h2>
+          <h2 className="font-display text-3xl sm:text-4xl md:text-5xl text-burgundy mt-3">Our Classes</h2>
           <Ornament className="mt-5" />
           <p className="text-muted-foreground mt-5 max-w-xl mx-auto">
             Five thoughtfully designed batches that nurture every dancer — from first steps to

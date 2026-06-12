@@ -75,7 +75,7 @@ export function Workshops() {
   };
 
   return (
-    <section id="workshops" className="py-24 px-5 lg:px-10 bg-muted/40">
+    <section id="workshops" className="py-16 sm:py-24 px-4 sm:px-5 lg:px-10 bg-muted/40">
       <div className="max-w-6xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -85,7 +85,7 @@ export function Workshops() {
           className="text-center mb-12"
         >
           <span className="text-gold uppercase tracking-[0.3em] text-xs">This Season</span>
-          <h2 className="font-display text-4xl md:text-5xl text-burgundy mt-3">
+          <h2 className="font-display text-3xl sm:text-4xl md:text-5xl text-burgundy mt-3">
             Upcoming Workshops
           </h2>
           <Ornament className="mt-5" />

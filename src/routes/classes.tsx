@@ -29,9 +29,9 @@ function ClassesPage() {
     <div className="bg-cream text-charcoal min-h-screen flex flex-col">
       <Navbar />
       <main className="flex-1">
-        <header className="relative pt-32 pb-12 px-5 lg:px-10 bg-burgundy text-cream overflow-hidden">
-          <Mandala className="absolute -top-20 -right-16 text-gold/20" size={420} />
-          <Mandala className="absolute -bottom-32 -left-20 text-gold/10" size={500} />
+        <header className="relative pt-24 sm:pt-32 pb-10 sm:pb-12 px-4 sm:px-5 lg:px-10 bg-burgundy text-cream overflow-hidden">
+          <Mandala className="absolute -top-20 -right-16 text-gold/20 max-w-[240px] sm:max-w-none" size={420} />
+          <Mandala className="absolute -bottom-32 -left-20 text-gold/10 max-w-[280px] sm:max-w-none" size={500} />
           <div className="relative max-w-4xl mx-auto text-center">
             <span
               className="block text-gold text-xl sm:text-2xl mb-3"
@@ -40,7 +40,7 @@ function ClassesPage() {
               শিক্ষা · অভ্যাস · অনুভূতি
             </span>
             <span className="text-gold uppercase tracking-[0.4em] text-xs">Curriculum</span>
-            <h1 className="font-display text-4xl md:text-6xl mt-3">Our Classes</h1>
+            <h1 className="font-display text-3xl sm:text-4xl md:text-6xl mt-3">Our Classes</h1>
             <Ornament className="mt-6" />
             <p className="mt-5 text-cream/85 max-w-2xl mx-auto">
               Five thoughtfully designed batches that nurture every dancer — from first ankle-bells

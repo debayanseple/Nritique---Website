@@ -59,10 +59,10 @@ function Index() {
         <Hero />
 
         {/* Teasers replacing inline Classes/Workshops sections */}
-        <section className="py-24 px-5 lg:px-10 bg-cream">
+        <section className="py-16 sm:py-24 px-4 sm:px-5 lg:px-10 bg-cream">
           <div className="max-w-6xl mx-auto text-center mb-12">
             <span className="text-gold uppercase tracking-[0.3em] text-xs">What We Offer</span>
-            <h2 className="font-display text-4xl md:text-5xl text-burgundy mt-3">
+            <h2 className="font-display text-3xl sm:text-4xl md:text-5xl text-burgundy mt-3">
               A Practice for Every Dancer
             </h2>
             <Ornament className="mt-5" />
@@ -75,16 +75,16 @@ function Index() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.1, duration: 0.6 }}
-                className={`relative ${t.bg} ${t.tint} rounded-xl p-10 overflow-hidden border border-gold/30`}
+                className={`relative ${t.bg} ${t.tint} rounded-xl p-6 sm:p-10 overflow-hidden border border-gold/30`}
               >
                 <span
-                  className="absolute top-4 right-5 text-5xl opacity-25"
+                  className="absolute top-4 right-5 text-3xl sm:text-5xl opacity-25"
                   style={{ fontFamily: '"Tiro Bangla", serif' }}
                 >
                   {t.devanagari}
                 </span>
                 <span className="text-xs uppercase tracking-[0.3em] opacity-80">{t.eyebrow}</span>
-                <h3 className="font-display text-3xl md:text-4xl mt-2">{t.title}</h3>
+                <h3 className="font-display text-2xl sm:text-3xl md:text-4xl mt-2">{t.title}</h3>
                 <p className="mt-4 opacity-85 max-w-md">{t.body}</p>
                 <Link
                   to={t.to}

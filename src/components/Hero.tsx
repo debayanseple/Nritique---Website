@@ -17,8 +17,8 @@ export function Hero() {
             <span className="text-xs uppercase tracking-[0.3em]">Background Video</span>
           </div>
         </div>
-        <Mandala className="absolute -top-24 -left-24 text-gold/15" size={520} />
-        <Mandala className="absolute -bottom-32 -right-24 text-gold/10" size={620} />
+        <Mandala className="absolute -top-24 -left-24 text-gold/15 max-w-[280px] sm:max-w-none" size={520} />
+        <Mandala className="absolute -bottom-32 -right-24 text-gold/10 max-w-[320px] sm:max-w-none" size={620} />
         <div className="absolute inset-0 bg-gradient-to-b from-charcoal/70 via-charcoal/75 to-charcoal/95" />
       </div>
 
@@ -29,7 +29,7 @@ export function Hero() {
         className="relative z-10 text-center max-w-3xl px-5"
       >
         <span
-          className="block text-gold text-2xl sm:text-3xl mb-3"
+          className="block text-gold text-xl sm:text-2xl md:text-3xl mb-3"
           style={{ fontFamily: '"Tiro Bangla", serif' }}
         >
           নৃত্যং ভাবস্য ভাষা
@@ -37,7 +37,7 @@ export function Hero() {
         <span className="inline-block text-gold uppercase tracking-[0.4em] text-xs mb-6">
           Kathak · Semi-Classical
         </span>
-        <h1 className="font-display text-4xl sm:text-5xl md:text-7xl text-cream leading-tight">
+        <h1 className="font-display text-3xl sm:text-5xl md:text-7xl text-cream leading-tight">
           Where Tradition <br className="hidden sm:block" />
           <span className="text-gold italic">Meets Expression</span>
         </h1>
@@ -46,7 +46,7 @@ export function Hero() {
           A gurukul-rooted academy of Kathak &amp; Semi-Classical dance — taught with reverence for
           the tradition and the freedom of every dancer's voice.
         </p>
-        <div className="mt-10 flex flex-col sm:flex-row gap-4 justify-center">
+        <div className="mt-8 sm:mt-10 pb-4 sm:pb-0 flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center">
           <Link
             to="/classes"
             className="rounded-md bg-gold px-6 py-3 text-charcoal font-semibold hover:bg-gold/90 transition border border-gold/70"

@@ -1,6 +1,6 @@
 import { j as jsxRuntimeExports, r as reactExports } from "../_libs/react.mjs";
 import { L as Link } from "../_libs/tanstack__react-router.mjs";
-import { N as Navbar, O as Ornament, F as Footer, M as Mandala, s as submitRegistration } from "./Footer-F8pWrGdN.mjs";
+import { N as Navbar, O as Ornament, F as Footer, M as Mandala, s as submitRegistration } from "./Footer-DhjGh7jU.mjs";
 import "../_libs/seroval.mjs";
 import { m as motion } from "../_libs/framer-motion.mjs";
 import { A as ArrowRight, P as Play, M as MapPin, a as Phone, b as Mail, c as MessageCircle } from "../_libs/lucide-react.mjs";
@@ -16,7 +16,7 @@ import "crypto";
 import "async_hooks";
 import "stream";
 import "../_libs/isbot.mjs";
-import "./server-DZmASGXn.mjs";
+import "./server-BhPU6tED.mjs";
 import "node:async_hooks";
 import "../_libs/h3-v2.mjs";
 import "../_libs/rou3.mjs";
@@ -36,8 +36,8 @@ function Hero() {
             /* @__PURE__ */ jsxRuntimeExports.jsx(Play, { size: 56 }),
             /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-xs uppercase tracking-[0.3em]", children: "Background Video" })
           ] }) }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx(Mandala, { className: "absolute -top-24 -left-24 text-gold/15", size: 520 }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx(Mandala, { className: "absolute -bottom-32 -right-24 text-gold/10", size: 620 }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx(Mandala, { className: "absolute -top-24 -left-24 text-gold/15 max-w-[280px] sm:max-w-none", size: 520 }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx(Mandala, { className: "absolute -bottom-32 -right-24 text-gold/10 max-w-[320px] sm:max-w-none", size: 620 }),
           /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "absolute inset-0 bg-gradient-to-b from-charcoal/70 via-charcoal/75 to-charcoal/95" })
         ] }),
         /* @__PURE__ */ jsxRuntimeExports.jsxs(
@@ -51,20 +51,20 @@ function Hero() {
               /* @__PURE__ */ jsxRuntimeExports.jsx(
                 "span",
                 {
-                  className: "block text-gold text-2xl sm:text-3xl mb-3",
+                  className: "block text-gold text-xl sm:text-2xl md:text-3xl mb-3",
                   style: { fontFamily: '"Tiro Bangla", serif' },
                   children: "নৃত্যং ভাবস্য ভাষা"
                 }
               ),
               /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "inline-block text-gold uppercase tracking-[0.4em] text-xs mb-6", children: "Kathak · Semi-Classical" }),
-              /* @__PURE__ */ jsxRuntimeExports.jsxs("h1", { className: "font-display text-4xl sm:text-5xl md:text-7xl text-cream leading-tight", children: [
+              /* @__PURE__ */ jsxRuntimeExports.jsxs("h1", { className: "font-display text-3xl sm:text-5xl md:text-7xl text-cream leading-tight", children: [
                 "Where Tradition ",
                 /* @__PURE__ */ jsxRuntimeExports.jsx("br", { className: "hidden sm:block" }),
                 /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-gold italic", children: "Meets Expression" })
               ] }),
               /* @__PURE__ */ jsxRuntimeExports.jsx(Ornament, { className: "my-7" }),
               /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-cream/80 text-base sm:text-lg max-w-xl mx-auto leading-relaxed", children: "A gurukul-rooted academy of Kathak & Semi-Classical dance — taught with reverence for the tradition and the freedom of every dancer's voice." }),
-              /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mt-10 flex flex-col sm:flex-row gap-4 justify-center", children: [
+              /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mt-8 sm:mt-10 pb-4 sm:pb-0 flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center", children: [
                 /* @__PURE__ */ jsxRuntimeExports.jsx(
                   Link,
                   {
@@ -116,7 +116,7 @@ const baseItems = [
 ];
 const items = [...baseItems, ...baseItems];
 function Gallery() {
-  return /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { id: "gallery", className: "py-24 bg-cream overflow-hidden relative", children: [
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { id: "gallery", className: "py-16 sm:py-24 bg-cream overflow-hidden relative", children: [
     /* @__PURE__ */ jsxRuntimeExports.jsx(
       "div",
       {
@@ -139,16 +139,16 @@ function Gallery() {
         className: "text-center mb-14",
         children: [
           /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-gold uppercase tracking-[0.3em] text-xs", children: "In Frame" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "font-display text-4xl md:text-5xl text-burgundy mt-3", children: "Workshop Moments" }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "font-display text-3xl sm:text-4xl md:text-5xl text-burgundy mt-3", children: "Workshop Moments" }),
           /* @__PURE__ */ jsxRuntimeExports.jsx(Ornament, { className: "mt-5" })
         ]
       }
     ) }),
     /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "relative", children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex w-max gap-10 px-10 py-8 animate-marquee hover:[animation-play-state:paused]", children: items.map((g, i) => /* @__PURE__ */ jsxRuntimeExports.jsxs(
+      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex w-max gap-5 sm:gap-10 px-5 sm:px-10 py-8 animate-marquee hover:[animation-play-state:paused]", children: items.map((g, i) => /* @__PURE__ */ jsxRuntimeExports.jsxs(
         "div",
         {
-          className: "shrink-0 w-[220px] sm:w-[260px] aspect-[3/4] rounded-lg shadow-2xl ring-1 ring-charcoal/10 overflow-hidden relative",
+          className: "shrink-0 w-[170px] sm:w-[220px] md:w-[260px] aspect-[3/4] rounded-lg shadow-2xl ring-1 ring-charcoal/10 overflow-hidden relative",
           style: {
             backgroundColor: g.color,
             transform: `rotate(${g.rotate}deg)`
@@ -167,8 +167,8 @@ function Gallery() {
         },
         i
       )) }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "pointer-events-none absolute inset-y-0 left-0 w-24 bg-gradient-to-r from-cream to-transparent" }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "pointer-events-none absolute inset-y-0 right-0 w-24 bg-gradient-to-l from-cream to-transparent" })
+      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "pointer-events-none absolute inset-y-0 left-0 w-10 sm:w-24 bg-gradient-to-r from-cream to-transparent" }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "pointer-events-none absolute inset-y-0 right-0 w-10 sm:w-24 bg-gradient-to-l from-cream to-transparent" })
     ] })
   ] });
 }
@@ -178,7 +178,7 @@ const stats = [
   { value: "30+", label: "Workshops Conducted" }
 ];
 function About() {
-  return /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { id: "about", className: "py-24 px-5 lg:px-10 bg-charcoal text-cream", children: [
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { id: "about", className: "py-14 sm:py-24 px-4 sm:px-5 lg:px-10 bg-charcoal text-cream", children: [
     /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "max-w-6xl mx-auto grid md:grid-cols-2 gap-12 items-center", children: [
       /* @__PURE__ */ jsxRuntimeExports.jsxs(
         motion.div,
@@ -189,7 +189,7 @@ function About() {
           transition: { duration: 0.7 },
           children: [
             /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-gold uppercase tracking-[0.3em] text-xs", children: "Our Story" }),
-            /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "font-display text-4xl md:text-5xl mt-3", children: "A Lineage in Motion" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "font-display text-3xl sm:text-4xl md:text-5xl mt-3", children: "A Lineage in Motion" }),
             /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mt-6 space-y-4 text-cream/80 leading-relaxed", children: [
               /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: "Founded in 2014, Nritya Dance Academy was born from a quiet conviction: that classical Indian dance is not a museum piece, but a living language. Every step we teach is rooted in tradition and shaped by the dancer who carries it forward." }),
               /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: "From four-year-olds finding their first taal to adults rediscovering grace, our studios hum with rhythm — disciplined, joyful, and unhurried. We believe in slow growth, careful technique, and the courage to perform." }),
@@ -213,7 +213,7 @@ function About() {
         }
       )
     ] }),
-    /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "max-w-6xl mx-auto mt-20 grid grid-cols-3 gap-6", children: stats.map((s, i) => /* @__PURE__ */ jsxRuntimeExports.jsxs(
+    /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "max-w-6xl mx-auto mt-12 sm:mt-20 grid grid-cols-1 sm:grid-cols-3 gap-6", children: stats.map((s, i) => /* @__PURE__ */ jsxRuntimeExports.jsxs(
       motion.div,
       {
         initial: { opacity: 0, y: 20 },
@@ -222,7 +222,7 @@ function About() {
         transition: { delay: i * 0.1, duration: 0.6 },
         className: "text-center border-t border-cream/20 pt-8",
         children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "font-display text-3xl md:text-5xl text-gold", children: s.value }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "font-display text-4xl sm:text-3xl md:text-5xl text-gold", children: s.value }),
           /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "mt-2 text-xs sm:text-sm uppercase tracking-wider text-cream/70", children: s.label })
         ]
       },
@@ -263,7 +263,7 @@ function Contact() {
       setIsSubmitting(false);
     }
   };
-  return /* @__PURE__ */ jsxRuntimeExports.jsx("section", { id: "contact", className: "py-24 px-5 lg:px-10 bg-cream", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "max-w-6xl mx-auto", children: [
+  return /* @__PURE__ */ jsxRuntimeExports.jsx("section", { id: "contact", className: "py-16 sm:py-24 px-4 sm:px-5 lg:px-10 bg-cream", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "max-w-6xl mx-auto", children: [
     /* @__PURE__ */ jsxRuntimeExports.jsxs(
       motion.div,
       {
@@ -274,7 +274,7 @@ function Contact() {
         className: "text-center mb-14",
         children: [
           /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-gold uppercase tracking-[0.3em] text-xs", children: "Get In Touch" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "font-display text-4xl md:text-5xl text-burgundy mt-3", children: "Visit Our Studio" })
+          /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "font-display text-3xl sm:text-4xl md:text-5xl text-burgundy mt-3", children: "Visit Our Studio" })
         ]
       }
     ),
@@ -319,7 +319,7 @@ function Contact() {
                 href: "https://wa.me/919830012345",
                 target: "_blank",
                 rel: "noreferrer",
-                className: "inline-flex items-center gap-2 rounded-md bg-burgundy text-cream px-5 py-3 font-semibold hover:bg-burgundy/90 transition",
+                className: "inline-flex sm:inline-flex w-full sm:w-auto justify-center items-center gap-2 rounded-md bg-burgundy text-cream px-5 py-3 font-semibold hover:bg-burgundy/90 transition",
                 children: [
                   /* @__PURE__ */ jsxRuntimeExports.jsx(MessageCircle, { size: 18 }),
                   " WhatsApp Us"
@@ -444,10 +444,10 @@ function Index() {
     /* @__PURE__ */ jsxRuntimeExports.jsx(Navbar, {}),
     /* @__PURE__ */ jsxRuntimeExports.jsxs("main", { children: [
       /* @__PURE__ */ jsxRuntimeExports.jsx(Hero, {}),
-      /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { className: "py-24 px-5 lg:px-10 bg-cream", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { className: "py-16 sm:py-24 px-4 sm:px-5 lg:px-10 bg-cream", children: [
         /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "max-w-6xl mx-auto text-center mb-12", children: [
           /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-gold uppercase tracking-[0.3em] text-xs", children: "What We Offer" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "font-display text-4xl md:text-5xl text-burgundy mt-3", children: "A Practice for Every Dancer" }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "font-display text-3xl sm:text-4xl md:text-5xl text-burgundy mt-3", children: "A Practice for Every Dancer" }),
           /* @__PURE__ */ jsxRuntimeExports.jsx(Ornament, { className: "mt-5" })
         ] }),
         /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "max-w-6xl mx-auto grid md:grid-cols-2 gap-6", children: teasers.map((t, i) => /* @__PURE__ */ jsxRuntimeExports.jsxs(motion.div, { initial: {
@@ -461,12 +461,12 @@ function Index() {
         }, transition: {
           delay: i * 0.1,
           duration: 0.6
-        }, className: `relative ${t.bg} ${t.tint} rounded-xl p-10 overflow-hidden border border-gold/30`, children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "absolute top-4 right-5 text-5xl opacity-25", style: {
+        }, className: `relative ${t.bg} ${t.tint} rounded-xl p-6 sm:p-10 overflow-hidden border border-gold/30`, children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "absolute top-4 right-5 text-3xl sm:text-5xl opacity-25", style: {
             fontFamily: '"Tiro Bangla", serif'
           }, children: t.devanagari }),
           /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-xs uppercase tracking-[0.3em] opacity-80", children: t.eyebrow }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "font-display text-3xl md:text-4xl mt-2", children: t.title }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "font-display text-2xl sm:text-3xl md:text-4xl mt-2", children: t.title }),
           /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mt-4 opacity-85 max-w-md", children: t.body }),
           /* @__PURE__ */ jsxRuntimeExports.jsxs(Link, { to: t.to, className: `mt-6 inline-flex items-center gap-2 font-semibold border-b ${t.tint === "text-cream" ? "border-gold text-gold" : "border-burgundy text-burgundy"} pb-0.5 hover:gap-3 transition-all`, children: [
             t.cta,

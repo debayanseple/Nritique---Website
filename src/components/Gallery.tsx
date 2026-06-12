@@ -39,7 +39,7 @@ const items = [...baseItems, ...baseItems];
 
 export function Gallery() {
   return (
-    <section id="gallery" className="py-24 bg-cream overflow-hidden relative">
+    <section id="gallery" className="py-16 sm:py-24 bg-cream overflow-hidden relative">
       {/* Striped backdrop */}
       <div
         aria-hidden
@@ -61,18 +61,18 @@ export function Gallery() {
           className="text-center mb-14"
         >
           <span className="text-gold uppercase tracking-[0.3em] text-xs">In Frame</span>
-          <h2 className="font-display text-4xl md:text-5xl text-burgundy mt-3">Workshop Moments</h2>
+          <h2 className="font-display text-3xl sm:text-4xl md:text-5xl text-burgundy mt-3">Workshop Moments</h2>
           <Ornament className="mt-5" />
         </motion.div>
       </div>
 
       {/* Auto-scrolling marquee */}
       <div className="relative">
-        <div className="flex w-max gap-10 px-10 py-8 animate-marquee hover:[animation-play-state:paused]">
+        <div className="flex w-max gap-5 sm:gap-10 px-5 sm:px-10 py-8 animate-marquee hover:[animation-play-state:paused]">
           {items.map((g, i) => (
             <div
               key={i}
-              className="shrink-0 w-[220px] sm:w-[260px] aspect-[3/4] rounded-lg shadow-2xl ring-1 ring-charcoal/10 overflow-hidden relative"
+              className="shrink-0 w-[170px] sm:w-[220px] md:w-[260px] aspect-[3/4] rounded-lg shadow-2xl ring-1 ring-charcoal/10 overflow-hidden relative"
               style={{
                 backgroundColor: g.color,
                 transform: `rotate(${g.rotate}deg)`,
@@ -95,8 +95,8 @@ export function Gallery() {
         </div>
 
         {/* Edge fades */}
-        <div className="pointer-events-none absolute inset-y-0 left-0 w-24 bg-gradient-to-r from-cream to-transparent" />
-        <div className="pointer-events-none absolute inset-y-0 right-0 w-24 bg-gradient-to-l from-cream to-transparent" />
+        <div className="pointer-events-none absolute inset-y-0 left-0 w-10 sm:w-24 bg-gradient-to-r from-cream to-transparent" />
+        <div className="pointer-events-none absolute inset-y-0 right-0 w-10 sm:w-24 bg-gradient-to-l from-cream to-transparent" />
       </div>
     </section>
   );

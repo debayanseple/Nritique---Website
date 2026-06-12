@@ -40,7 +40,7 @@ export function Contact() {
   };
 
   return (
-    <section id="contact" className="py-24 px-5 lg:px-10 bg-cream">
+    <section id="contact" className="py-16 sm:py-24 px-4 sm:px-5 lg:px-10 bg-cream">
       <div className="max-w-6xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -50,7 +50,7 @@ export function Contact() {
           className="text-center mb-14"
         >
           <span className="text-gold uppercase tracking-[0.3em] text-xs">Get In Touch</span>
-          <h2 className="font-display text-4xl md:text-5xl text-burgundy mt-3">Visit Our Studio</h2>
+          <h2 className="font-display text-3xl sm:text-4xl md:text-5xl text-burgundy mt-3">Visit Our Studio</h2>
         </motion.div>
 
         <div className="grid md:grid-cols-2 gap-12">
@@ -90,7 +90,7 @@ export function Contact() {
               href="https://wa.me/919830012345"
               target="_blank"
               rel="noreferrer"
-              className="inline-flex items-center gap-2 rounded-md bg-burgundy text-cream px-5 py-3 font-semibold hover:bg-burgundy/90 transition"
+              className="inline-flex sm:inline-flex w-full sm:w-auto justify-center items-center gap-2 rounded-md bg-burgundy text-cream px-5 py-3 font-semibold hover:bg-burgundy/90 transition"
             >
               <MessageCircle size={18} /> WhatsApp Us
             </a>

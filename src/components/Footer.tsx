@@ -20,7 +20,7 @@ export function Footer() {
 
   return (
     <footer className="bg-[#5c1a1a] text-[#e8d5b0]/80">
-      <div className="max-w-6xl mx-auto px-6 lg:px-10 pt-14 pb-10">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-10 pt-10 sm:pt-14 pb-8 sm:pb-10">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
           {/* Brand */}
           <div>
@@ -88,7 +88,7 @@ export function Footer() {
                 placeholder="Your email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="flex-1 min-w-0 bg-transparent border border-[#e8d5b0]/30 rounded px-3 py-2 text-sm text-[#e8d5b0] placeholder-[#e8d5b0]/40 focus:outline-none focus:border-[#c9a84c]"
+                className="flex-1 min-w-0 bg-transparent border border-[#e8d5b0]/30 rounded px-3 py-2.5 sm:py-2 text-sm text-[#e8d5b0] placeholder-[#e8d5b0]/40 focus:outline-none focus:border-[#c9a84c]"
               />
               <button
                 type="button"

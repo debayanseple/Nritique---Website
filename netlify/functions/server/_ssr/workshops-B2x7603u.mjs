@@ -1,6 +1,6 @@
 import { j as jsxRuntimeExports, r as reactExports } from "../_libs/react.mjs";
-import { N as Navbar, M as Mandala, O as Ornament, F as Footer, s as submitRegistration } from "./Footer-F8pWrGdN.mjs";
-import { M as Modal } from "./Modal-napdCvOa.mjs";
+import { N as Navbar, M as Mandala, O as Ornament, F as Footer, s as submitRegistration } from "./Footer-DhjGh7jU.mjs";
+import { M as Modal } from "./Modal-Y_8gPQXx.mjs";
 import "../_libs/seroval.mjs";
 import { m as motion } from "../_libs/framer-motion.mjs";
 import { C as Calendar, M as MapPin, U as Users } from "../_libs/lucide-react.mjs";
@@ -17,7 +17,7 @@ import "crypto";
 import "async_hooks";
 import "stream";
 import "../_libs/isbot.mjs";
-import "./server-DZmASGXn.mjs";
+import "./server-BhPU6tED.mjs";
 import "node:async_hooks";
 import "../_libs/h3-v2.mjs";
 import "../_libs/rou3.mjs";
@@ -234,7 +234,7 @@ function Workshops() {
       (ws) => ws.map((w) => w.id === id && w.seatsLeft > 0 ? { ...w, seatsLeft: w.seatsLeft - 1 } : w)
     );
   };
-  return /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { id: "workshops", className: "py-24 px-5 lg:px-10 bg-muted/40", children: [
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { id: "workshops", className: "py-16 sm:py-24 px-4 sm:px-5 lg:px-10 bg-muted/40", children: [
     /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "max-w-6xl mx-auto", children: [
       /* @__PURE__ */ jsxRuntimeExports.jsxs(
         motion.div,
@@ -246,7 +246,7 @@ function Workshops() {
           className: "text-center mb-12",
           children: [
             /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-gold uppercase tracking-[0.3em] text-xs", children: "This Season" }),
-            /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "font-display text-4xl md:text-5xl text-burgundy mt-3", children: "Upcoming Workshops" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "font-display text-3xl sm:text-4xl md:text-5xl text-burgundy mt-3", children: "Upcoming Workshops" }),
             /* @__PURE__ */ jsxRuntimeExports.jsx(Ornament, { className: "mt-5" })
           ]
         }
@@ -350,15 +350,15 @@ function WorkshopsPage() {
   return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "bg-cream text-charcoal min-h-screen flex flex-col", children: [
     /* @__PURE__ */ jsxRuntimeExports.jsx(Navbar, {}),
     /* @__PURE__ */ jsxRuntimeExports.jsxs("main", { className: "flex-1", children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsxs("header", { className: "relative pt-32 pb-12 px-5 lg:px-10 bg-charcoal text-cream overflow-hidden", children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsx(Mandala, { className: "absolute -top-24 -left-20 text-gold/15", size: 460 }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx(Mandala, { className: "absolute -bottom-28 -right-16 text-gold/10", size: 520 }),
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("header", { className: "relative pt-24 sm:pt-32 pb-10 sm:pb-12 px-4 sm:px-5 lg:px-10 bg-charcoal text-cream overflow-hidden", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx(Mandala, { className: "absolute -top-24 -left-20 text-gold/15 max-w-[260px] sm:max-w-none", size: 460 }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx(Mandala, { className: "absolute -bottom-28 -right-16 text-gold/10 max-w-[280px] sm:max-w-none", size: 520 }),
         /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "relative max-w-4xl mx-auto text-center", children: [
           /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "block text-gold text-xl sm:text-2xl mb-3", style: {
             fontFamily: '"Tiro Bangla", serif'
           }, children: "তাল · লয় · ভাব" }),
           /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-gold uppercase tracking-[0.4em] text-xs", children: "This Season" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("h1", { className: "font-display text-4xl md:text-6xl mt-3", children: "Workshops" }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("h1", { className: "font-display text-3xl sm:text-4xl md:text-6xl mt-3", children: "Workshops" }),
           /* @__PURE__ */ jsxRuntimeExports.jsx(Ornament, { className: "mt-6" }),
           /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mt-5 text-cream/80 max-w-2xl mx-auto", children: "Short, immersive cohorts — taal, abhinaya, and choreography intensives — held in our Kolkata studio and online for dancers everywhere." })
         ] })

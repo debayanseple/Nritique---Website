@@ -1,7 +1,8 @@
 import { r as reactExports, j as jsxRuntimeExports } from "../_libs/react.mjs";
 import { d as useRouterState, e as useNavigate, L as Link } from "../_libs/tanstack__react-router.mjs";
-import { b as createServerFn, T as TSS_SERVER_FUNCTION, g as getServerFnById } from "./server-DZmASGXn.mjs";
+import { b as createServerFn, T as TSS_SERVER_FUNCTION, g as getServerFnById } from "./server-BhPU6tED.mjs";
 import { X, d as Menu, I as Instagram, Y as Youtube, c as MessageCircle } from "../_libs/lucide-react.mjs";
+import { A as AnimatePresence, m as motion } from "../_libs/framer-motion.mjs";
 import { d as discriminatedUnionType, o as objectType, s as stringType, l as literalType, n as numberType } from "../_libs/zod.mjs";
 const items = [
   { label: "Classes", to: "/classes" },
@@ -22,6 +23,9 @@ function Navbar() {
     window.addEventListener("scroll", onScroll);
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
+  reactExports.useEffect(() => {
+    setOpen(false);
+  }, [pathname]);
   const goHash = (hash) => {
     setOpen(false);
     if (isHome) {
@@ -36,7 +40,7 @@ function Navbar() {
     {
       className: `fixed top-0 inset-x-0 z-40 transition-all ${transparent ? "bg-transparent" : "bg-cream/85 backdrop-blur-md border-b border-gold/20"}`,
       children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsxs("nav", { className: "max-w-7xl mx-auto px-5 lg:px-10 h-16 flex items-center justify-between", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("nav", { className: "max-w-7xl mx-auto px-4 sm:px-5 lg:px-10 h-16 flex items-center justify-between", children: [
           /* @__PURE__ */ jsxRuntimeExports.jsxs(
             Link,
             {
@@ -70,52 +74,76 @@ function Navbar() {
               }
             ) }, l.label);
           }) }),
-          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-3", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-2 sm:gap-3", children: [
             /* @__PURE__ */ jsxRuntimeExports.jsx(
               Link,
               {
                 to: "/workshops",
-                className: "hidden sm:inline-flex items-center rounded-md bg-gold px-4 py-2 text-sm font-semibold text-charcoal hover:bg-gold/90 transition border border-gold/60",
-                children: "Register Now"
+                className: `inline-flex items-center rounded-md bg-gold px-3 py-1.5 sm:px-4 sm:py-2 text-xs sm:text-sm font-semibold text-charcoal hover:bg-gold/90 transition border border-gold/60 ${open ? "hidden" : ""}`,
+                children: "Register"
               }
             ),
             /* @__PURE__ */ jsxRuntimeExports.jsx(
               "button",
               {
-                className: `md:hidden ${transparent ? "text-cream" : "text-burgundy"}`,
+                className: `md:hidden min-w-[44px] min-h-[44px] flex items-center justify-center ${transparent ? "text-cream" : "text-burgundy"}`,
                 onClick: () => setOpen(!open),
                 "aria-label": "Menu",
-                children: open ? /* @__PURE__ */ jsxRuntimeExports.jsx(X, {}) : /* @__PURE__ */ jsxRuntimeExports.jsx(Menu, {})
+                children: open ? /* @__PURE__ */ jsxRuntimeExports.jsx(X, { size: 24 }) : /* @__PURE__ */ jsxRuntimeExports.jsx(Menu, { size: 24 })
               }
             )
           ] })
         ] }),
-        open && /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "md:hidden bg-cream border-t border-gold/20", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("ul", { className: "px-5 py-4 space-y-3", children: [
-          items.map((l) => /* @__PURE__ */ jsxRuntimeExports.jsx("li", { children: l.to ? /* @__PURE__ */ jsxRuntimeExports.jsx(
-            Link,
+        /* @__PURE__ */ jsxRuntimeExports.jsx(AnimatePresence, { children: open && /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx(
+            motion.div,
             {
-              to: l.to,
-              onClick: () => setOpen(false),
-              className: "block w-full text-left py-1 text-charcoal",
-              children: l.label
+              initial: { opacity: 0 },
+              animate: { opacity: 1 },
+              exit: { opacity: 0 },
+              transition: { duration: 0.2 },
+              className: "md:hidden fixed inset-0 top-16 bg-charcoal/40 backdrop-blur-sm z-30",
+              onClick: () => setOpen(false)
             }
-          ) : /* @__PURE__ */ jsxRuntimeExports.jsx(
-            "button",
+          ),
+          /* @__PURE__ */ jsxRuntimeExports.jsx(
+            motion.div,
             {
-              onClick: () => goHash(l.hash),
-              className: "block w-full text-left py-1 text-charcoal",
-              children: l.label
+              initial: { opacity: 0, y: -8 },
+              animate: { opacity: 1, y: 0 },
+              exit: { opacity: 0, y: -8 },
+              transition: { duration: 0.25, ease: "easeOut" },
+              className: "md:hidden bg-cream border-t border-gold/20 relative z-40 shadow-xl",
+              children: /* @__PURE__ */ jsxRuntimeExports.jsxs("ul", { className: "px-5 py-4 space-y-1", children: [
+                items.map((l) => /* @__PURE__ */ jsxRuntimeExports.jsx("li", { children: l.to ? /* @__PURE__ */ jsxRuntimeExports.jsx(
+                  Link,
+                  {
+                    to: l.to,
+                    onClick: () => setOpen(false),
+                    className: "block w-full text-left py-3 px-2 text-charcoal text-base font-medium rounded-md hover:bg-gold/10 transition-colors active:bg-gold/20",
+                    activeProps: { className: "text-burgundy bg-burgundy/5" },
+                    children: l.label
+                  }
+                ) : /* @__PURE__ */ jsxRuntimeExports.jsx(
+                  "button",
+                  {
+                    onClick: () => goHash(l.hash),
+                    className: "block w-full text-left py-3 px-2 text-charcoal text-base font-medium rounded-md hover:bg-gold/10 transition-colors active:bg-gold/20",
+                    children: l.label
+                  }
+                ) }, l.label)),
+                /* @__PURE__ */ jsxRuntimeExports.jsx("li", { className: "pt-2", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
+                  Link,
+                  {
+                    to: "/classes",
+                    onClick: () => setOpen(false),
+                    className: "block w-full rounded-md bg-gold px-4 py-3 text-sm font-semibold text-charcoal text-center active:bg-gold/80",
+                    children: "Register Now"
+                  }
+                ) })
+              ] })
             }
-          ) }, l.label)),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("li", { children: /* @__PURE__ */ jsxRuntimeExports.jsx(
-            Link,
-            {
-              to: "/classes",
-              onClick: () => setOpen(false),
-              className: "block w-full rounded-md bg-gold px-4 py-2 text-sm font-semibold text-charcoal text-center",
-              children: "Register Now"
-            }
-          ) })
+          )
         ] }) })
       ]
     }
@@ -213,7 +241,7 @@ const batches = [
 ];
 function Footer() {
   const [email, setEmail] = reactExports.useState("");
-  return /* @__PURE__ */ jsxRuntimeExports.jsx("footer", { className: "bg-[#5c1a1a] text-[#e8d5b0]/80", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "max-w-6xl mx-auto px-6 lg:px-10 pt-14 pb-10", children: [
+  return /* @__PURE__ */ jsxRuntimeExports.jsx("footer", { className: "bg-[#5c1a1a] text-[#e8d5b0]/80", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "max-w-6xl mx-auto px-4 sm:px-6 lg:px-10 pt-10 sm:pt-14 pb-8 sm:pb-10", children: [
     /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10", children: [
       /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
         /* @__PURE__ */ jsxRuntimeExports.jsxs("h3", { className: "font-display text-[#e8d5b0] text-xl tracking-widest flex items-center gap-2 mb-4", children: [
@@ -251,7 +279,7 @@ function Footer() {
               placeholder: "Your email",
               value: email,
               onChange: (e) => setEmail(e.target.value),
-              className: "flex-1 min-w-0 bg-transparent border border-[#e8d5b0]/30 rounded px-3 py-2 text-sm text-[#e8d5b0] placeholder-[#e8d5b0]/40 focus:outline-none focus:border-[#c9a84c]"
+              className: "flex-1 min-w-0 bg-transparent border border-[#e8d5b0]/30 rounded px-3 py-2.5 sm:py-2 text-sm text-[#e8d5b0] placeholder-[#e8d5b0]/40 focus:outline-none focus:border-[#c9a84c]"
             }
           ),
           /* @__PURE__ */ jsxRuntimeExports.jsx(
