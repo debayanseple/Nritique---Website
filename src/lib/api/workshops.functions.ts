@@ -1,5 +1,3 @@
-import { createServerFn } from "@tanstack/react-start";
-
 export interface Workshop {
   id: string;
   title: string;
@@ -13,13 +11,15 @@ export interface Workshop {
 }
 
 const SHEET_ID = "1M4XNi6tMzFiYHyp4j5Dw56DAmLEEIFMPA-s-SJzwelA";
+// gviz/tq supports CORS and works without auth for publicly-shared sheets
+const CSV_URL = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:csv`;
 
 function col(row: Record<string, string>, key: string): string {
   const found = Object.keys(row).find((k) => k.trim().toLowerCase() === key.toLowerCase());
   return found !== undefined ? row[found].trim() : "";
 }
 
-// Handles /file/d/ID/view  →  and  ?id=ID / open?id=ID formats
+// Handles /file/d/ID/view and ?id=ID / open?id=ID Drive URL formats
 function toDirectUrl(url: string): string {
   const byPath = url.match(/\/file\/d\/([^/?]+)/);
   if (byPath) return `https://drive.google.com/uc?export=view&id=${byPath[1]}`;
@@ -76,37 +76,25 @@ function parseCSV(text: string): Record<string, string>[] {
     });
 }
 
-export const fetchLiveWorkshops = createServerFn({ method: "GET" }).handler(
-  async (): Promise<Workshop[]> => {
-    // gviz/tq works without authentication for publicly-shared sheets
-    const csvUrl = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:csv`;
-    try {
-      const res = await fetch(csvUrl);
-      if (!res.ok) {
-        console.error(`[workshops] Sheet fetch failed: ${res.status} ${res.statusText}`);
-        return [];
-      }
-      const text = await res.text();
-      const rows = parseCSV(text);
-      const live = rows.filter((r) => col(r, "Status?").toLowerCase() === "live");
-      return live.map((r, i): Workshop => {
-        const imageRaw = col(r, "Workshop image");
-        const regLink = col(r, "Registration link");
-        return {
-          id: `ws-${i}`,
-          title: col(r, "Workshop title"),
-          category: col(r, "Category"),
-          mode: col(r, "Mode").toLowerCase() === "online" ? "Online" : "Offline",
-          location: col(r, "Location"),
-          seatsLeft: parseInt(col(r, "Seats left").replace(/[^\d]/g, "") || "0", 10),
-          fee: parseInt(col(r, "Price (INR)").replace(/[^\d]/g, "") || "0", 10),
-          poster: imageRaw ? toDirectUrl(imageRaw) : undefined,
-          registrationLink: regLink || undefined,
-        };
-      });
-    } catch (err) {
-      console.error("[workshops] Failed to load sheet:", err);
-      return [];
-    }
-  },
-);
+export async function fetchLiveWorkshops(): Promise<Workshop[]> {
+  const res = await fetch(CSV_URL);
+  if (!res.ok) throw new Error(`Sheet fetch failed: ${res.status}`);
+  const rows = parseCSV(await res.text());
+  return rows
+    .filter((r) => col(r, "Status?").toLowerCase() === "live")
+    .map((r, i): Workshop => {
+      const imageRaw = col(r, "Workshop image");
+      const regLink = col(r, "Registration link");
+      return {
+        id: `ws-${i}`,
+        title: col(r, "Workshop title"),
+        category: col(r, "Category"),
+        mode: col(r, "Mode").toLowerCase() === "online" ? "Online" : "Offline",
+        location: col(r, "Location"),
+        seatsLeft: parseInt(col(r, "Seats left").replace(/[^\d]/g, "") || "0", 10),
+        fee: parseInt(col(r, "Price (INR)").replace(/[^\d]/g, "") || "0", 10),
+        poster: imageRaw ? toDirectUrl(imageRaw) : undefined,
+        registrationLink: regLink || undefined,
+      };
+    });
+}
