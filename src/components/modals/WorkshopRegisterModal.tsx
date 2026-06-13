@@ -1,6 +1,6 @@
 import { useState, useEffect, type FormEvent } from "react";
 import { Modal } from "../ui/Modal";
-import type { Workshop } from "../Workshops";
+import type { Workshop } from "../../lib/api/workshops.functions";
 import { submitRegistration } from "../../lib/api/register.functions";
 
 interface Props {
@@ -41,8 +41,7 @@ export function WorkshopRegisterModal({ workshop, onClose, onReserve }: Props) {
           level: form.level,
           workshopTitle: workshop.title,
           fee: workshop.fee,
-          date: workshop.date,
-          format: workshop.format,
+          format: workshop.mode,
         },
       });
 

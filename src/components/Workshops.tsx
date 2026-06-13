@@ -1,76 +1,39 @@
 import { useState, useMemo } from "react";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { motion } from "framer-motion";
-import { Calendar, MapPin, Users } from "lucide-react";
+import { MapPin, Users } from "lucide-react";
 import { WorkshopRegisterModal } from "./modals/WorkshopRegisterModal";
 import { Ornament } from "./Ornament";
+import { fetchLiveWorkshops } from "../lib/api/workshops.functions";
+import type { Workshop } from "../lib/api/workshops.functions";
 
-export interface Workshop {
-  id: string;
-  title: string;
-  style: string;
-  date: string;
-  format: "Online" | "Offline";
-  fee: number;
-  seatsTotal: number;
-  seatsLeft: number;
-  color: string;
-  poster?: string;
-}
+export type { Workshop };
 
-const initial: Workshop[] = [
-  {
-    id: "w1",
-    title: "Abhinaya Intensive",
-    style: "Kathak",
-    date: "July 12, 2026",
-    format: "Offline",
-    fee: 1800,
-    seatsTotal: 25,
-    seatsLeft: 7,
-    color: "#6B1E2A",
-    poster: "/images/workshops/abhinaya-intensive.png",
-  },
-  {
-    id: "w2",
-    title: "Rhythm & Taal Lab",
-    style: "Semi-Classical",
-    date: "July 26, 2026",
-    format: "Online",
-    fee: 900,
-    seatsTotal: 40,
-    seatsLeft: 18,
-    color: "#C9A84C",
-    poster: "/images/workshops/Rhythm & Taal Lab.png",
-  },
-  {
-    id: "w3",
-    title: "Monsoon Choreography",
-    style: "Odissi-influenced",
-    date: "August 09, 2026",
-    format: "Offline",
-    fee: 2200,
-    seatsTotal: 20,
-    seatsLeft: 4,
-    color: "#1C1C1E",
-    poster: "/images/workshops/Monsoon Choreography.png",
-  },
-];
-
-const tabs = ["All", "Upcoming", "Online", "Offline"] as const;
+const tabs = ["All", "Online", "Offline"] as const;
 
 export function Workshops() {
-  const [workshops, setWorkshops] = useState<Workshop[]>(initial);
+  const queryClient = useQueryClient();
+  const {
+    data: workshops = [],
+    isLoading,
+    isError,
+  } = useQuery({
+    queryKey: ["workshops"],
+    queryFn: () => fetchLiveWorkshops(),
+    staleTime: 5 * 60 * 1000,
+  });
+
   const [tab, setTab] = useState<(typeof tabs)[number]>("All");
   const [selected, setSelected] = useState<Workshop | null>(null);
 
   const filtered = useMemo(() => {
-    if (tab === "All" || tab === "Upcoming") return workshops;
-    return workshops.filter((w) => w.format === tab);
+    if (tab === "All") return workshops;
+    return workshops.filter((w) => w.mode === tab);
   }, [tab, workshops]);
 
   const reserve = (id: string) => {
-    setWorkshops((ws) =>
-      ws.map((w) => (w.id === id && w.seatsLeft > 0 ? { ...w, seatsLeft: w.seatsLeft - 1 } : w)),
+    queryClient.setQueryData<Workshop[]>(["workshops"], (prev = []) =>
+      prev.map((w) => (w.id === id && w.seatsLeft > 0 ? { ...w, seatsLeft: w.seatsLeft - 1 } : w)),
     );
   };
 
@@ -105,70 +68,104 @@ export function Workshops() {
           ))}
         </div>
 
-        <div className="grid md:grid-cols-3 gap-6">
-          {filtered.map((w, i) => (
-            <motion.article
-              key={w.id}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: i * 0.08, duration: 0.6 }}
-              className="rounded-xl bg-card border border-border overflow-hidden flex flex-col"
-            >
-              <div className="aspect-[4/3] overflow-hidden" style={{ backgroundColor: w.color }}>
-                {w.poster ? (
-                  <img
-                    src={w.poster}
-                    alt={`${w.title} poster`}
-                    className="w-full h-full object-cover"
-                  />
-                ) : (
-                  <div className="w-full h-full flex items-center justify-center text-cream">
-                    <span className="opacity-70 text-sm uppercase tracking-[0.3em]">Poster</span>
+        {isLoading && (
+          <div className="flex justify-center py-16">
+            <div className="w-8 h-8 border-2 border-gold border-t-transparent rounded-full animate-spin" />
+          </div>
+        )}
+
+        {isError && !isLoading && (
+          <p className="text-center py-16 text-charcoal/50">
+            Could not load workshops. Please try again later.
+          </p>
+        )}
+
+        {!isLoading && !isError && filtered.length === 0 && (
+          <p className="text-center py-16 text-charcoal/50">
+            No workshops available at the moment. Check back soon.
+          </p>
+        )}
+
+        {!isLoading && filtered.length > 0 && (
+          <div className="grid md:grid-cols-3 gap-6">
+            {filtered.map((w, i) => (
+              <motion.article
+                key={w.id}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.08, duration: 0.6 }}
+                className="rounded-xl bg-card border border-border overflow-hidden flex flex-col"
+              >
+                <div className="aspect-[4/3] overflow-hidden bg-burgundy/20">
+                  {w.poster ? (
+                    <img
+                      src={w.poster}
+                      alt={`${w.title} poster`}
+                      className="w-full h-full object-cover"
+                    />
+                  ) : (
+                    <div className="w-full h-full flex items-center justify-center">
+                      <span className="text-burgundy/40 text-sm uppercase tracking-[0.3em]">
+                        Poster
+                      </span>
+                    </div>
+                  )}
+                </div>
+                <div className="p-6 flex flex-col flex-1">
+                  <div className="flex items-center justify-between mb-2">
+                    <span className="text-xs uppercase tracking-wider text-burgundy font-semibold">
+                      {w.category}
+                    </span>
+                    <span
+                      className={`text-xs rounded-full px-2 py-0.5 ${
+                        w.mode === "Online"
+                          ? "bg-gold/20 text-charcoal"
+                          : "bg-burgundy/10 text-burgundy"
+                      }`}
+                    >
+                      {w.mode}
+                    </span>
                   </div>
-                )}
-              </div>
-              <div className="p-6 flex flex-col flex-1">
-                <div className="flex items-center justify-between mb-2">
-                  <span className="text-xs uppercase tracking-wider text-burgundy font-semibold">
-                    {w.style}
-                  </span>
-                  <span
-                    className={`text-xs rounded-full px-2 py-0.5 ${
-                      w.format === "Online"
-                        ? "bg-gold/20 text-charcoal"
-                        : "bg-burgundy/10 text-burgundy"
-                    }`}
-                  >
-                    {w.format}
-                  </span>
+                  <h3 className="font-display text-xl text-charcoal">{w.title}</h3>
+                  <div className="mt-3 space-y-1 text-sm text-muted-foreground">
+                    {w.location && (
+                      <p className="flex items-center gap-2">
+                        <MapPin size={14} /> {w.location}
+                      </p>
+                    )}
+                    <p className="flex items-center gap-2">
+                      <Users size={14} /> {w.seatsLeft} seats left
+                    </p>
+                  </div>
+                  <div className="mt-5 flex items-center justify-between">
+                    <span className="font-display text-2xl text-burgundy">
+                      {w.fee > 0 ? `₹${w.fee}` : "Free"}
+                    </span>
+                    {w.registrationLink ? (
+                      <a
+                        href={w.registrationLink}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className={`rounded-md bg-burgundy text-cream px-4 py-2 text-sm font-semibold hover:bg-burgundy/90 transition ${w.seatsLeft === 0 ? "pointer-events-none opacity-50" : ""}`}
+                      >
+                        {w.seatsLeft === 0 ? "Sold Out" : "Register"}
+                      </a>
+                    ) : (
+                      <button
+                        disabled={w.seatsLeft === 0}
+                        onClick={() => setSelected(w)}
+                        className="rounded-md bg-burgundy text-cream px-4 py-2 text-sm font-semibold hover:bg-burgundy/90 transition disabled:opacity-50"
+                      >
+                        {w.seatsLeft === 0 ? "Sold Out" : "Register"}
+                      </button>
+                    )}
+                  </div>
                 </div>
-                <h3 className="font-display text-xl text-charcoal">{w.title}</h3>
-                <div className="mt-3 space-y-1 text-sm text-muted-foreground">
-                  <p className="flex items-center gap-2">
-                    <Calendar size={14} /> {w.date}
-                  </p>
-                  <p className="flex items-center gap-2">
-                    <MapPin size={14} /> {w.format === "Online" ? "Zoom" : "Studio · Kolkata"}
-                  </p>
-                  <p className="flex items-center gap-2">
-                    <Users size={14} /> {w.seatsLeft} seats left
-                  </p>
-                </div>
-                <div className="mt-5 flex items-center justify-between">
-                  <span className="font-display text-2xl text-burgundy">₹{w.fee}</span>
-                  <button
-                    disabled={w.seatsLeft === 0}
-                    onClick={() => setSelected(w)}
-                    className="rounded-md bg-burgundy text-cream px-4 py-2 text-sm font-semibold hover:bg-burgundy/90 transition disabled:opacity-50"
-                  >
-                    {w.seatsLeft === 0 ? "Sold Out" : "Register"}
-                  </button>
-                </div>
-              </div>
-            </motion.article>
-          ))}
-        </div>
+              </motion.article>
+            ))}
+          </div>
+        )}
 
         <div className="text-center mt-10">
           <a
