@@ -17,10 +17,10 @@ export function About() {
           transition={{ duration: 0.7 }}
         >
           <span className="text-gold uppercase tracking-[0.3em] text-xs">Our Story</span>
-          <h2 className="font-display text-3xl sm:text-4xl md:text-5xl mt-3">A Lineage in Motion</h2>
+          <h2 className="font-display text-3xl sm:text-4xl md:text-5xl mt-3">Srijita Baidya</h2>
           <div className="mt-6 space-y-4 text-cream/80 leading-relaxed">
             <p>
-              Srijita Baidya built two lives in parallel — one at 35,000 feet as a cabin crew with
+              I built two lives in parallel — one at 35,000 feet as a cabin crew with
               IndiGo, and one on screen, where her honest, behind-the-scenes look at aviation
               quietly became a movement. Bold, articulate, and genuinely herself, she reached
               1 million subscribers in just over a year — one of the fastest rises in her space.
@@ -35,7 +35,7 @@ export function About() {
               about their craft, wherever they are starting from.
             </p>
             <p className="text-gold italic font-display text-lg">
-              — Srijita Baidya, Founder
+              — Founder
             </p>
           </div>
         </motion.div>
@@ -47,10 +47,12 @@ export function About() {
           transition={{ duration: 0.7 }}
           className="relative"
         >
-          <div className="aspect-[4/5] rounded-xl bg-burgundy flex items-center justify-center">
-            <span className="text-cream/40 text-xs uppercase tracking-[0.3em]">
-              Founder Portrait
-            </span>
+          <div className="aspect-[4/5] rounded-xl overflow-hidden bg-burgundy">
+            <img
+              src="/images/workshops/founder image.jpg"
+              alt="Srijita Baidya — Founder"
+              className="w-full h-full object-cover"
+            />
           </div>
           <div className="absolute -bottom-6 -left-6 w-32 h-32 border-2 border-gold rounded-xl -z-0 hidden md:block" />
         </motion.div>

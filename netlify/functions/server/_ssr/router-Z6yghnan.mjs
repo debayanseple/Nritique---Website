@@ -125,7 +125,7 @@ function RootComponent() {
   const { queryClient } = Route$3.useRouteContext();
   return /* @__PURE__ */ jsxRuntimeExports.jsx(QueryClientProvider, { client: queryClient, children: /* @__PURE__ */ jsxRuntimeExports.jsx(Outlet, {}) });
 }
-const $$splitComponentImporter$2 = () => import("./workshops-DRmVwvQC.mjs");
+const $$splitComponentImporter$2 = () => import("./workshops-BWWGgqbd.mjs");
 const Route$2 = createFileRoute("/workshops")({
   head: () => ({
     meta: [{
@@ -143,7 +143,7 @@ const Route$2 = createFileRoute("/workshops")({
   }),
   component: lazyRouteComponent($$splitComponentImporter$2, "component")
 });
-const $$splitComponentImporter$1 = () => import("./classes-vY8AItAx.mjs");
+const $$splitComponentImporter$1 = () => import("./classes-Bn1CSuOY.mjs");
 const Route$1 = createFileRoute("/classes")({
   head: () => ({
     meta: [{
@@ -161,7 +161,7 @@ const Route$1 = createFileRoute("/classes")({
   }),
   component: lazyRouteComponent($$splitComponentImporter$1, "component")
 });
-const $$splitComponentImporter = () => import("./index-DgIwU_J6.mjs");
+const $$splitComponentImporter = () => import("./index-pdZIc2PS.mjs");
 const Route = createFileRoute("/")({
   head: () => ({
     meta: [{

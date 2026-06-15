@@ -1,6 +1,6 @@
 import { j as jsxRuntimeExports, r as reactExports } from "../_libs/react.mjs";
 import { L as Link } from "../_libs/tanstack__react-router.mjs";
-import { N as Navbar, O as Ornament, F as Footer, M as Mandala, s as submitRegistration } from "./Footer-DvB6QNmc.mjs";
+import { N as Navbar, O as Ornament, F as Footer, M as Mandala, s as submitRegistration } from "./Footer-bHUju30e.mjs";
 import "../_libs/seroval.mjs";
 import { m as motion } from "../_libs/framer-motion.mjs";
 import { A as ArrowRight, P as Play, M as MapPin, a as Phone, b as Mail, c as MessageCircle } from "../_libs/lucide-react.mjs";
@@ -16,7 +16,7 @@ import "crypto";
 import "async_hooks";
 import "stream";
 import "../_libs/isbot.mjs";
-import "./server-BrLu54HF.mjs";
+import "./server-CW5ajerd.mjs";
 import "node:async_hooks";
 import "../_libs/h3-v2.mjs";
 import "../_libs/rou3.mjs";
@@ -189,12 +189,12 @@ function About() {
           transition: { duration: 0.7 },
           children: [
             /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-gold uppercase tracking-[0.3em] text-xs", children: "Our Story" }),
-            /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "font-display text-3xl sm:text-4xl md:text-5xl mt-3", children: "A Lineage in Motion" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "font-display text-3xl sm:text-4xl md:text-5xl mt-3", children: "Srijita Baidya" }),
             /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mt-6 space-y-4 text-cream/80 leading-relaxed", children: [
-              /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: "Srijita Baidya built two lives in parallel — one at 35,000 feet as a cabin crew with IndiGo, and one on screen, where her honest, behind-the-scenes look at aviation quietly became a movement. Bold, articulate, and genuinely herself, she reached 1 million subscribers in just over a year — one of the fastest rises in her space." }),
+              /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: "I built two lives in parallel — one at 35,000 feet as a cabin crew with IndiGo, and one on screen, where her honest, behind-the-scenes look at aviation quietly became a movement. Bold, articulate, and genuinely herself, she reached 1 million subscribers in just over a year — one of the fastest rises in her space." }),
               /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: "But dance was always the deeper pull. She left her career in aviation to pursue it fully — not as a hobby, but as a calling. That same discipline she brought to the skies she now brings to the studio: rigorous, expressive, and unhurried." }),
               /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: "Nritique is where that journey lives — a space built for dancers who are serious about their craft, wherever they are starting from." }),
-              /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-gold italic font-display text-lg", children: "— Srijita Baidya, Founder" })
+              /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-gold italic font-display text-lg", children: "— Founder" })
             ] })
           ]
         }
@@ -208,7 +208,14 @@ function About() {
           transition: { duration: 0.7 },
           className: "relative",
           children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "aspect-[4/5] rounded-xl bg-burgundy flex items-center justify-center", children: /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-cream/40 text-xs uppercase tracking-[0.3em]", children: "Founder Portrait" }) }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "aspect-[4/5] rounded-xl overflow-hidden bg-burgundy", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
+              "img",
+              {
+                src: "/images/workshops/founder image.jpg",
+                alt: "Srijita Baidya — Founder",
+                className: "w-full h-full object-cover"
+              }
+            ) }),
             /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "absolute -bottom-6 -left-6 w-32 h-32 border-2 border-gold rounded-xl -z-0 hidden md:block" })
           ]
         }
