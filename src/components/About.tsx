@@ -20,17 +20,22 @@ export function About() {
           <h2 className="font-display text-3xl sm:text-4xl md:text-5xl mt-3">A Lineage in Motion</h2>
           <div className="mt-6 space-y-4 text-cream/80 leading-relaxed">
             <p>
-              Founded in 2014, Nritya Dance Academy was born from a quiet conviction: that classical
-              Indian dance is not a museum piece, but a living language. Every step we teach is
-              rooted in tradition and shaped by the dancer who carries it forward.
+              Srijita Baidya built two lives in parallel — one at 35,000 feet as a cabin crew with
+              IndiGo, and one on screen, where her honest, behind-the-scenes look at aviation
+              quietly became a movement. Bold, articulate, and genuinely herself, she reached
+              1 million subscribers in just over a year — one of the fastest rises in her space.
             </p>
             <p>
-              From four-year-olds finding their first taal to adults rediscovering grace, our
-              studios hum with rhythm — disciplined, joyful, and unhurried. We believe in slow
-              growth, careful technique, and the courage to perform.
+              But dance was always the deeper pull. She left her career in aviation to pursue it
+              fully — not as a hobby, but as a calling. That same discipline she brought to the
+              skies she now brings to the studio: rigorous, expressive, and unhurried.
+            </p>
+            <p>
+              Nritique is where that journey lives — a space built for dancers who are serious
+              about their craft, wherever they are starting from.
             </p>
             <p className="text-gold italic font-display text-lg">
-              — Smt. Anaya Sengupta, Founder & Artistic Director
+              — Srijita Baidya, Founder
             </p>
           </div>
         </motion.div>
