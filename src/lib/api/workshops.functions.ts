@@ -114,7 +114,7 @@ export async function fetchLiveWorkshops(): Promise<Workshop[]> {
       return s === "live" || s === "upcoming";
     })
     .map((r, i): Workshop => {
-      const imageRaw = col(r, "Workshop image");
+      const imageRaw = col(r, "Cover Photo");
       const regLink = col(r, "Registration link");
       const statusRaw = col(r, "Status?").toLowerCase();
       const title = col(r, "Workshop title");

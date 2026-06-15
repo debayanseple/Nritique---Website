@@ -1,5 +1,5 @@
 import { j as jsxRuntimeExports, r as reactExports } from "../_libs/react.mjs";
-import { N as Navbar, M as Mandala, O as Ornament, F as Footer, s as submitRegistration } from "./Footer-BO-rUDIe.mjs";
+import { N as Navbar, M as Mandala, O as Ornament, F as Footer, s as submitRegistration } from "./Footer-CNyUboY1.mjs";
 import { M as Modal } from "./Modal-Y_8gPQXx.mjs";
 import "../_libs/seroval.mjs";
 import { m as motion } from "../_libs/framer-motion.mjs";
@@ -16,7 +16,7 @@ import "crypto";
 import "async_hooks";
 import "stream";
 import "../_libs/isbot.mjs";
-import "./server-uYNHDmd8.mjs";
+import "./server-CWFOXm5u.mjs";
 import "node:async_hooks";
 import "../_libs/h3-v2.mjs";
 import "../_libs/rou3.mjs";
