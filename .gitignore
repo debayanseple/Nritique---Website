@@ -33,3 +33,8 @@ dist-ssr
 
 # Local Netlify folder
 .netlify
+
+# Environment variables
+.env
+.env.*
+!.env.example
