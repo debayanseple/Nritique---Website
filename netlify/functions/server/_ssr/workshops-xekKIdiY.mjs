@@ -1,9 +1,10 @@
 import { j as jsxRuntimeExports, r as reactExports } from "../_libs/react.mjs";
-import { N as Navbar, M as Mandala, O as Ornament, F as Footer, s as submitRegistration } from "./Footer-DhjGh7jU.mjs";
+import { N as Navbar, M as Mandala, O as Ornament, F as Footer, s as submitRegistration } from "./Footer-BO-rUDIe.mjs";
+import { u as useQueryClient, a as useQuery } from "../_libs/tanstack__react-query.mjs";
 import { M as Modal } from "./Modal-Y_8gPQXx.mjs";
 import "../_libs/seroval.mjs";
 import { m as motion } from "../_libs/framer-motion.mjs";
-import { C as Calendar, M as MapPin, U as Users } from "../_libs/lucide-react.mjs";
+import { M as MapPin, U as Users } from "../_libs/lucide-react.mjs";
 import "../_libs/tanstack__react-router.mjs";
 import "../_libs/tanstack__router-core.mjs";
 import "../_libs/tanstack__history.mjs";
@@ -17,12 +18,13 @@ import "crypto";
 import "async_hooks";
 import "stream";
 import "../_libs/isbot.mjs";
-import "./server-BhPU6tED.mjs";
+import "./server-uYNHDmd8.mjs";
 import "node:async_hooks";
 import "../_libs/h3-v2.mjs";
 import "../_libs/rou3.mjs";
 import "../_libs/srvx.mjs";
 import "../_libs/zod.mjs";
+import "../_libs/tanstack__query-core.mjs";
 import "../_libs/motion-dom.mjs";
 import "../_libs/motion-utils.mjs";
 const empty = { name: "", email: "", phone: "", level: "Beginner" };
@@ -54,8 +56,7 @@ function WorkshopRegisterModal({ workshop, onClose, onReserve }) {
           level: form.level,
           workshopTitle: workshop.title,
           fee: workshop.fee,
-          date: workshop.date,
-          format: workshop.format
+          format: workshop.mode
         }
       });
       if (res.success) {
@@ -182,56 +183,135 @@ function Input({
     )
   ] });
 }
-const initial = [
-  {
-    id: "w1",
-    title: "Abhinaya Intensive",
-    style: "Kathak",
-    date: "July 12, 2026",
-    format: "Offline",
-    fee: 1800,
-    seatsTotal: 25,
-    seatsLeft: 7,
-    color: "#6B1E2A",
-    poster: "/images/workshops/abhinaya-intensive.png"
-  },
-  {
-    id: "w2",
-    title: "Rhythm & Taal Lab",
-    style: "Semi-Classical",
-    date: "July 26, 2026",
-    format: "Online",
-    fee: 900,
-    seatsTotal: 40,
-    seatsLeft: 18,
-    color: "#C9A84C",
-    poster: "/images/workshops/Rhythm & Taal Lab.png"
-  },
-  {
-    id: "w3",
-    title: "Monsoon Choreography",
-    style: "Odissi-influenced",
-    date: "August 09, 2026",
-    format: "Offline",
-    fee: 2200,
-    seatsTotal: 20,
-    seatsLeft: 4,
-    color: "#1C1C1E",
-    poster: "/images/workshops/Monsoon Choreography.png"
+const SHEET_ID = "1M4XNi6tMzFiYHyp4j5Dw56DAmLEEIFMPA-s-SJzwelA";
+const REGISTRATION_SHEET_ID = "1r6Zwhf1hBpF2qD25r2SC-vGs58mhZh1ZewjIpaXVSDI";
+const CSV_URL = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:csv`;
+const WORKSHOP_REG_CSV_URL = `https://docs.google.com/spreadsheets/d/${REGISTRATION_SHEET_ID}/gviz/tq?tqx=out:csv&sheet=Workshops`;
+function col(row, key) {
+  const found = Object.keys(row).find((k) => k.trim().toLowerCase() === key.toLowerCase());
+  return found !== void 0 ? row[found].trim() : "";
+}
+function toDirectUrl(url) {
+  const byPath = url.match(/\/file\/d\/([^/?]+)/);
+  if (byPath) return `https://drive.google.com/thumbnail?id=${byPath[1]}&sz=w800`;
+  const byParam = url.match(/[?&]id=([^&]+)/);
+  if (byParam) return `https://drive.google.com/thumbnail?id=${byParam[1]}&sz=w800`;
+  return url;
+}
+function parseCSV(text) {
+  const lines = [];
+  let cur = "", inQ = false;
+  for (let i = 0; i < text.length; i++) {
+    const c = text[i];
+    if (c === '"') {
+      inQ = !inQ;
+    } else if (c === "\n" && !inQ) {
+      lines.push(cur);
+      cur = "";
+      continue;
+    }
+    cur += c;
   }
-];
-const tabs = ["All", "Upcoming", "Online", "Offline"];
+  if (cur.trim()) lines.push(cur);
+  if (lines.length < 2) return [];
+  const splitRow = (line) => {
+    const vals = [];
+    let v = "", q = false;
+    for (let i = 0; i < line.length; i++) {
+      const c = line[i];
+      if (c === '"') {
+        q = !q;
+      } else if (c === "," && !q) {
+        vals.push(v.replace(/^"|"$/g, "").trim());
+        v = "";
+        continue;
+      } else {
+        v += c;
+      }
+    }
+    vals.push(v.replace(/^"|"$/g, "").trim());
+    return vals;
+  };
+  const headers = splitRow(lines[0]);
+  return lines.slice(1).filter((l) => l.trim()).map((line) => {
+    const vals = splitRow(line);
+    const result = {};
+    headers.forEach((h, i) => {
+      const key = h.trim();
+      if (!(key in result)) result[key] = vals[i] ?? "";
+    });
+    return result;
+  });
+}
+async function fetchWorkshopRegistrationCounts() {
+  try {
+    const res = await fetch(WORKSHOP_REG_CSV_URL);
+    if (!res.ok) return /* @__PURE__ */ new Map();
+    const rows = parseCSV(await res.text());
+    const counts = /* @__PURE__ */ new Map();
+    for (const row of rows) {
+      const title = col(row, "Workshop Title").toLowerCase().trim();
+      if (title) counts.set(title, (counts.get(title) ?? 0) + 1);
+    }
+    return counts;
+  } catch {
+    return /* @__PURE__ */ new Map();
+  }
+}
+async function fetchLiveWorkshops() {
+  const [workshopsRes, regCounts] = await Promise.all([
+    fetch(CSV_URL),
+    fetchWorkshopRegistrationCounts()
+  ]);
+  if (!workshopsRes.ok) throw new Error(`Sheet fetch failed: ${workshopsRes.status}`);
+  const rows = parseCSV(await workshopsRes.text());
+  return rows.filter((r) => {
+    const s = col(r, "Status?").toLowerCase();
+    return s === "live" || s === "upcoming";
+  }).map((r, i) => {
+    const imageRaw = col(r, "Workshop image");
+    const regLink = col(r, "Registration link");
+    const statusRaw = col(r, "Status?").toLowerCase();
+    const title = col(r, "Workshop title");
+    const totalSeats = parseInt(col(r, "Seats left").replace(/[^\d]/g, "") || "0", 10);
+    const registered = regCounts.get(title.toLowerCase().trim()) ?? 0;
+    return {
+      id: `ws-${i}`,
+      title,
+      category: col(r, "Category"),
+      mode: col(r, "Mode").toLowerCase() === "online" ? "Online" : "Offline",
+      location: col(r, "Location"),
+      seatsLeft: Math.max(0, totalSeats - registered),
+      fee: parseInt(col(r, "Price (INR)").replace(/[^\d]/g, "") || "0", 10),
+      poster: imageRaw ? toDirectUrl(imageRaw) : void 0,
+      registrationLink: regLink || void 0,
+      status: statusRaw === "live" ? "live" : "upcoming"
+    };
+  });
+}
+const tabs = ["All", "Online", "Offline"];
 function Workshops() {
-  const [workshops, setWorkshops] = reactExports.useState(initial);
+  const queryClient = useQueryClient();
+  const {
+    data: workshops = [],
+    isLoading,
+    isError
+  } = useQuery({
+    queryKey: ["workshops"],
+    queryFn: () => fetchLiveWorkshops(),
+    staleTime: 60 * 1e3,
+    refetchInterval: 60 * 1e3
+  });
   const [tab, setTab] = reactExports.useState("All");
   const [selected, setSelected] = reactExports.useState(null);
   const filtered = reactExports.useMemo(() => {
-    if (tab === "All" || tab === "Upcoming") return workshops;
-    return workshops.filter((w) => w.format === tab);
+    if (tab === "All") return workshops;
+    return workshops.filter((w) => w.mode === tab);
   }, [tab, workshops]);
   const reserve = (id) => {
-    setWorkshops(
-      (ws) => ws.map((w) => w.id === id && w.seatsLeft > 0 ? { ...w, seatsLeft: w.seatsLeft - 1 } : w)
+    queryClient.setQueryData(
+      ["workshops"],
+      (prev = []) => prev.map((w) => w.id === id && w.seatsLeft > 0 ? { ...w, seatsLeft: w.seatsLeft - 1 } : w)
     );
   };
   return /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { id: "workshops", className: "py-16 sm:py-24 px-4 sm:px-5 lg:px-10 bg-muted/40", children: [
@@ -260,7 +340,10 @@ function Workshops() {
         },
         t
       )) }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "grid md:grid-cols-3 gap-6", children: filtered.map((w, i) => /* @__PURE__ */ jsxRuntimeExports.jsxs(
+      isLoading && /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex justify-center py-16", children: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "w-8 h-8 border-2 border-gold border-t-transparent rounded-full animate-spin" }) }),
+      isError && !isLoading && /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-center py-16 text-charcoal/50", children: "Could not load workshops. Please try again later." }),
+      !isLoading && !isError && filtered.length === 0 && /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-center py-16 text-charcoal/50", children: "No workshops available at the moment. Check back soon." }),
+      !isLoading && filtered.length > 0 && /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "grid md:grid-cols-3 gap-6", children: filtered.map((w, i) => /* @__PURE__ */ jsxRuntimeExports.jsxs(
         motion.article,
         {
           initial: { opacity: 0, y: 30 },
@@ -269,36 +352,39 @@ function Workshops() {
           transition: { delay: i * 0.08, duration: 0.6 },
           className: "rounded-xl bg-card border border-border overflow-hidden flex flex-col",
           children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "aspect-[4/3] overflow-hidden", style: { backgroundColor: w.color }, children: w.poster ? /* @__PURE__ */ jsxRuntimeExports.jsx(
-              "img",
-              {
-                src: w.poster,
-                alt: `${w.title} poster`,
-                className: "w-full h-full object-cover"
-              }
-            ) : /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "w-full h-full flex items-center justify-center text-cream", children: /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "opacity-70 text-sm uppercase tracking-[0.3em]", children: "Poster" }) }) }),
+            /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "aspect-[4/3] overflow-hidden bg-burgundy/20 relative", children: [
+              w.poster ? /* @__PURE__ */ jsxRuntimeExports.jsx(
+                "img",
+                {
+                  src: w.poster,
+                  alt: `${w.title} poster`,
+                  className: `w-full h-full object-cover ${w.status === "upcoming" ? "opacity-50" : ""}`,
+                  onError: (e) => {
+                    e.currentTarget.style.display = "none";
+                    e.currentTarget.nextElementSibling?.classList.remove("hidden");
+                  }
+                }
+              ) : null,
+              /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: `w-full h-full flex items-center justify-center ${w.poster ? "hidden" : ""}`, children: /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-burgundy/40 text-sm uppercase tracking-[0.3em]", children: "Poster" }) }),
+              w.status === "upcoming" && /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "absolute inset-0 flex items-center justify-center bg-charcoal/30", children: /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "bg-gold text-charcoal text-xs font-bold uppercase tracking-widest px-3 py-1 rounded-full", children: "Coming Soon" }) })
+            ] }),
             /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "p-6 flex flex-col flex-1", children: [
               /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center justify-between mb-2", children: [
-                /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-xs uppercase tracking-wider text-burgundy font-semibold", children: w.style }),
+                /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-xs uppercase tracking-wider text-burgundy font-semibold", children: w.category }),
                 /* @__PURE__ */ jsxRuntimeExports.jsx(
                   "span",
                   {
-                    className: `text-xs rounded-full px-2 py-0.5 ${w.format === "Online" ? "bg-gold/20 text-charcoal" : "bg-burgundy/10 text-burgundy"}`,
-                    children: w.format
+                    className: `text-xs rounded-full px-2 py-0.5 ${w.mode === "Online" ? "bg-gold/20 text-charcoal" : "bg-burgundy/10 text-burgundy"}`,
+                    children: w.mode
                   }
                 )
               ] }),
               /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "font-display text-xl text-charcoal", children: w.title }),
               /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mt-3 space-y-1 text-sm text-muted-foreground", children: [
-                /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { className: "flex items-center gap-2", children: [
-                  /* @__PURE__ */ jsxRuntimeExports.jsx(Calendar, { size: 14 }),
-                  " ",
-                  w.date
-                ] }),
-                /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { className: "flex items-center gap-2", children: [
+                w.location && /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { className: "flex items-center gap-2", children: [
                   /* @__PURE__ */ jsxRuntimeExports.jsx(MapPin, { size: 14 }),
                   " ",
-                  w.format === "Online" ? "Zoom" : "Studio · Kolkata"
+                  w.location
                 ] }),
                 /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { className: "flex items-center gap-2", children: [
                   /* @__PURE__ */ jsxRuntimeExports.jsx(Users, { size: 14 }),
@@ -308,11 +394,17 @@ function Workshops() {
                 ] })
               ] }),
               /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mt-5 flex items-center justify-between", children: [
-                /* @__PURE__ */ jsxRuntimeExports.jsxs("span", { className: "font-display text-2xl text-burgundy", children: [
-                  "₹",
-                  w.fee
-                ] }),
-                /* @__PURE__ */ jsxRuntimeExports.jsx(
+                /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "font-display text-2xl text-burgundy", children: w.fee > 0 ? `₹${w.fee}` : "Free" }),
+                w.status === "upcoming" ? /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "rounded-md bg-charcoal/10 text-charcoal/50 px-4 py-2 text-sm font-semibold", children: "Coming Soon" }) : w.registrationLink ? /* @__PURE__ */ jsxRuntimeExports.jsx(
+                  "a",
+                  {
+                    href: w.registrationLink,
+                    target: "_blank",
+                    rel: "noopener noreferrer",
+                    className: `rounded-md bg-burgundy text-cream px-4 py-2 text-sm font-semibold hover:bg-burgundy/90 transition ${w.seatsLeft === 0 ? "pointer-events-none opacity-50" : ""}`,
+                    children: w.seatsLeft === 0 ? "Sold Out" : "Register"
+                  }
+                ) : /* @__PURE__ */ jsxRuntimeExports.jsx(
                   "button",
                   {
                     disabled: w.seatsLeft === 0,

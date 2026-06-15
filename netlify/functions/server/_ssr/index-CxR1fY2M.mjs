@@ -1,6 +1,6 @@
 import { j as jsxRuntimeExports, r as reactExports } from "../_libs/react.mjs";
 import { L as Link } from "../_libs/tanstack__react-router.mjs";
-import { N as Navbar, O as Ornament, F as Footer, M as Mandala, s as submitRegistration } from "./Footer-DhjGh7jU.mjs";
+import { N as Navbar, O as Ornament, F as Footer, M as Mandala, s as submitRegistration } from "./Footer-BO-rUDIe.mjs";
 import "../_libs/seroval.mjs";
 import { m as motion } from "../_libs/framer-motion.mjs";
 import { A as ArrowRight, P as Play, M as MapPin, a as Phone, b as Mail, c as MessageCircle } from "../_libs/lucide-react.mjs";
@@ -16,7 +16,7 @@ import "crypto";
 import "async_hooks";
 import "stream";
 import "../_libs/isbot.mjs";
-import "./server-BhPU6tED.mjs";
+import "./server-uYNHDmd8.mjs";
 import "node:async_hooks";
 import "../_libs/h3-v2.mjs";
 import "../_libs/rou3.mjs";

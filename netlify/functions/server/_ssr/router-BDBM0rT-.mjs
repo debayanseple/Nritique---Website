@@ -1,4 +1,4 @@
-import { Q as QueryClient } from "../_libs/tanstack__query-core.mjs";
+import { b as QueryClient } from "../_libs/tanstack__query-core.mjs";
 import { Q as QueryClientProvider } from "../_libs/tanstack__react-query.mjs";
 import { c as createRouter, a as createRootRouteWithContext, u as useRouter, L as Link, O as Outlet, H as HeadContent, S as Scripts, b as createFileRoute, l as lazyRouteComponent } from "../_libs/tanstack__react-router.mjs";
 import { r as reactExports, j as jsxRuntimeExports } from "../_libs/react.mjs";
@@ -15,7 +15,7 @@ import "crypto";
 import "async_hooks";
 import "stream";
 import "../_libs/isbot.mjs";
-const appCss = "/assets/styles-mK2vtot2.css";
+const appCss = "/assets/styles-P7uTYnCq.css";
 function reportLovableError(error, context = {}) {
   if (typeof window === "undefined") return;
   window.__lovableEvents?.captureException?.(
@@ -125,7 +125,7 @@ function RootComponent() {
   const { queryClient } = Route$3.useRouteContext();
   return /* @__PURE__ */ jsxRuntimeExports.jsx(QueryClientProvider, { client: queryClient, children: /* @__PURE__ */ jsxRuntimeExports.jsx(Outlet, {}) });
 }
-const $$splitComponentImporter$2 = () => import("./workshops-B2x7603u.mjs");
+const $$splitComponentImporter$2 = () => import("./workshops-xekKIdiY.mjs");
 const Route$2 = createFileRoute("/workshops")({
   head: () => ({
     meta: [{
@@ -143,7 +143,7 @@ const Route$2 = createFileRoute("/workshops")({
   }),
   component: lazyRouteComponent($$splitComponentImporter$2, "component")
 });
-const $$splitComponentImporter$1 = () => import("./classes-DoeejsY1.mjs");
+const $$splitComponentImporter$1 = () => import("./classes-DAp3s_Mp.mjs");
 const Route$1 = createFileRoute("/classes")({
   head: () => ({
     meta: [{
@@ -161,7 +161,7 @@ const Route$1 = createFileRoute("/classes")({
   }),
   component: lazyRouteComponent($$splitComponentImporter$1, "component")
 });
-const $$splitComponentImporter = () => import("./index-CWR9r-m-.mjs");
+const $$splitComponentImporter = () => import("./index-CxR1fY2M.mjs");
 const Route = createFileRoute("/")({
   head: () => ({
     meta: [{
