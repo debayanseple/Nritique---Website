@@ -20,7 +20,8 @@ export function Workshops() {
   } = useQuery({
     queryKey: ["workshops"],
     queryFn: () => fetchLiveWorkshops(),
-    staleTime: 5 * 60 * 1000,
+    staleTime: 60 * 1000,
+    refetchInterval: 60 * 1000,
   });
 
   const [tab, setTab] = useState<(typeof tabs)[number]>("All");
@@ -97,17 +98,27 @@ export function Workshops() {
                 transition={{ delay: i * 0.08, duration: 0.6 }}
                 className="rounded-xl bg-card border border-border overflow-hidden flex flex-col"
               >
-                <div className="aspect-[4/3] overflow-hidden bg-burgundy/20">
+                <div className="aspect-[4/3] overflow-hidden bg-burgundy/20 relative">
                   {w.poster ? (
                     <img
                       src={w.poster}
                       alt={`${w.title} poster`}
-                      className="w-full h-full object-cover"
+                      className={`w-full h-full object-cover ${w.status === "upcoming" ? "opacity-50" : ""}`}
+                      onError={(e) => {
+                        (e.currentTarget as HTMLImageElement).style.display = "none";
+                        e.currentTarget.nextElementSibling?.classList.remove("hidden");
+                      }}
                     />
-                  ) : (
-                    <div className="w-full h-full flex items-center justify-center">
-                      <span className="text-burgundy/40 text-sm uppercase tracking-[0.3em]">
-                        Poster
+                  ) : null}
+                  <div className={`w-full h-full flex items-center justify-center ${w.poster ? "hidden" : ""}`}>
+                    <span className="text-burgundy/40 text-sm uppercase tracking-[0.3em]">
+                      Poster
+                    </span>
+                  </div>
+                  {w.status === "upcoming" && (
+                    <div className="absolute inset-0 flex items-center justify-center bg-charcoal/30">
+                      <span className="bg-gold text-charcoal text-xs font-bold uppercase tracking-widest px-3 py-1 rounded-full">
+                        Coming Soon
                       </span>
                     </div>
                   )}
@@ -142,7 +153,11 @@ export function Workshops() {
                     <span className="font-display text-2xl text-burgundy">
                       {w.fee > 0 ? `₹${w.fee}` : "Free"}
                     </span>
-                    {w.registrationLink ? (
+                    {w.status === "upcoming" ? (
+                      <span className="rounded-md bg-charcoal/10 text-charcoal/50 px-4 py-2 text-sm font-semibold">
+                        Coming Soon
+                      </span>
+                    ) : w.registrationLink ? (
                       <a
                         href={w.registrationLink}
                         target="_blank"
