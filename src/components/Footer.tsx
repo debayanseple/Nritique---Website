@@ -55,7 +55,7 @@ export function Footer() {
             <ul className="space-y-2 text-sm">
               {exploreLinks.map((l) => (
                 <li key={l.label}>
-                  {"hash" in l ? (
+                  {l.to === "/" ? (
                     <Link to={l.to} hash={l.hash} className="hover:text-[#c9a84c] transition">
                       {l.label}
                     </Link>
