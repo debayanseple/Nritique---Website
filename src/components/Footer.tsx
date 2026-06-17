@@ -2,10 +2,14 @@ import { Instagram, Youtube, MessageCircle } from "lucide-react";
 import { Link } from "@tanstack/react-router";
 import { useState } from "react";
 
-const exploreLinks = [
-  { label: "Workshops", to: "/workshops" as const },
-  { label: "Gallery", to: "/" as const, hash: "gallery" },
-  { label: "About", to: "/" as const, hash: "about" },
+type ExploreLink =
+  | { label: string; to: "/workshops"; hash?: never }
+  | { label: string; to: "/"; hash: string };
+
+const exploreLinks: ExploreLink[] = [
+  { label: "Workshops", to: "/workshops" },
+  { label: "Gallery", to: "/", hash: "gallery" },
+  { label: "About", to: "/", hash: "about" },
 ];
 
 const batches = [
@@ -28,14 +32,13 @@ export function Footer() {
               NUPUR <span className="text-[#c9a84c]">✦</span> KATHAK
             </h3>
             <p className="text-sm leading-relaxed">
-              A Kathak &amp; semi-classical academy in Andheri West, Mumbai — teaching the Lucknow
-              gharana with care since 2009.
+              A Kathak &amp; semi-classical academy in Kolkata, WestBengal — teaching the Indian Classical with care since 2009.
             </p>
             <div className="flex gap-3 mt-5">
-              <a href="#" aria-label="Instagram" className="hover:text-[#c9a84c] transition">
+              <a href="https://www.instagram.com/srijita_baidya/" aria-label="Instagram" className="hover:text-[#c9a84c] transition">
                 <Instagram size={18} />
               </a>
-              <a href="#" aria-label="YouTube" className="hover:text-[#c9a84c] transition">
+              <a href="https://www.youtube.com/@SrijitaBaidya" aria-label="YouTube" className="hover:text-[#c9a84c] transition">
                 <Youtube size={18} />
               </a>
               <a href="#" aria-label="WhatsApp" className="hover:text-[#c9a84c] transition">
@@ -52,9 +55,15 @@ export function Footer() {
             <ul className="space-y-2 text-sm">
               {exploreLinks.map((l) => (
                 <li key={l.label}>
-                  <Link to={l.to} hash={l.hash} className="hover:text-[#c9a84c] transition">
-                    {l.label}
-                  </Link>
+                  {"hash" in l ? (
+                    <Link to={l.to} hash={l.hash} className="hover:text-[#c9a84c] transition">
+                      {l.label}
+                    </Link>
+                  ) : (
+                    <Link to={l.to} className="hover:text-[#c9a84c] transition">
+                      {l.label}
+                    </Link>
+                  )}
                 </li>
               ))}
             </ul>
@@ -101,8 +110,8 @@ export function Footer() {
         </div>
 
         <div className="mt-10 pt-6 border-t border-[#e8d5b0]/15 flex flex-col sm:flex-row justify-between items-center gap-2 text-xs text-[#e8d5b0]/50">
-          <span>© {new Date().getFullYear()} Nupur Kathak Academy. All rights reserved.</span>
-          <span>Andheri West, Mumbai · hello@nupurkathak.in</span>
+          <span>© {new Date().getFullYear()} Nritique Dance Classes. All rights reserved.</span>
+          <span>Kolkata, WestBengal · hello@nritique.in</span>
         </div>
       </div>
     </footer>
