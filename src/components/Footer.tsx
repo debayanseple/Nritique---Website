@@ -29,7 +29,7 @@ export function Footer() {
           {/* Brand */}
           <div>
             <h3 className="font-display text-[#e8d5b0] text-xl tracking-widest flex items-center gap-2 mb-4">
-              NUPUR <span className="text-[#c9a84c]">✦</span> KATHAK
+              NRITYA <span className="text-[#c9a84c]">✦</span> Indian Classical Dance
             </h3>
             <p className="text-sm leading-relaxed">
               A Kathak &amp; semi-classical academy in Kolkata, WestBengal — teaching the Indian Classical with care since 2009.
