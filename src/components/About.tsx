@@ -49,7 +49,7 @@ export function About() {
         >
           <div className="aspect-[4/5] rounded-xl overflow-hidden bg-burgundy">
             <img
-              src="/images/workshops/founder image.jpg"
+              src="/images/founder image.jpg"
               alt="Srijita Baidya — Founder"
               className="w-full h-full object-cover"
             />
