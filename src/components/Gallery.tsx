@@ -1,43 +1,27 @@
+import { useQuery } from "@tanstack/react-query";
 import { motion } from "framer-motion";
 import { Ornament } from "./Ornament";
+import { fetchLiveWorkshops } from "../lib/api/workshops.functions";
 
-interface GalleryItem {
-  workshopName: string;
-  color: string;
-  rotate: number;
-  poster?: string;
-}
-
-const baseItems: GalleryItem[] = [
-  {
-    workshopName: "Abhinaya Intensive",
-    color: "#6B1E2A",
-    rotate: -6,
-    poster: "/images/workshops/abhinaya-intensive.png",
-  },
-  {
-    workshopName: "Monsoon Choreography",
-    color: "#C9A84C",
-    rotate: 4,
-    poster: "/images/workshops/Monsoon Choreography.png",
-  },
-  {
-    workshopName: "Taal Lab",
-    color: "#1C1C1E",
-    rotate: -3,
-    poster: "/images/workshops/Rhythm & Taal Lab.png",
-  },
-  { workshopName: "Stage Repertoire", color: "#8B2A38", rotate: 5 },
-  { workshopName: "Kathak Foundations", color: "#A8893C", rotate: -5 },
-  { workshopName: "Bhava Workshop", color: "#4A1520", rotate: 3 },
-  { workshopName: "Semi-Classical", color: "#D4B45C", rotate: -4 },
-  { workshopName: "Guru Vandana", color: "#6B1E2A", rotate: 6 },
-];
-
-// Duplicate for seamless loop
-const items = [...baseItems, ...baseItems];
+const COLORS = ["#6B1E2A", "#C9A84C", "#1C1C1E", "#8B2A38", "#A8893C", "#4A1520", "#D4B45C", "#6B1E2A"];
+const ROTATIONS = [-6, 4, -3, 5, -5, 3, -4, 6];
 
 export function Gallery() {
+  const { data: workshops = [] } = useQuery({
+    queryKey: ["workshops"],
+    queryFn: fetchLiveWorkshops,
+    staleTime: 60 * 1000,
+  });
+
+  const baseItems = workshops.map((w, i) => ({
+    workshopName: w.title,
+    color: COLORS[i % COLORS.length],
+    rotate: ROTATIONS[i % ROTATIONS.length],
+    poster: w.poster,
+  }));
+
+  const items = baseItems.length > 0 ? [...baseItems, ...baseItems] : [];
+
   return (
     <section id="gallery" className="py-16 sm:py-24 bg-cream overflow-hidden relative">
       {/* Striped backdrop */}
