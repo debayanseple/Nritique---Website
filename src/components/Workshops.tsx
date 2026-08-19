@@ -110,7 +110,9 @@ export function Workshops() {
                       }}
                     />
                   ) : null}
-                  <div className={`w-full h-full flex items-center justify-center ${w.poster ? "hidden" : ""}`}>
+                  <div
+                    className={`w-full h-full flex items-center justify-center ${w.poster ? "hidden" : ""}`}
+                  >
                     <span className="text-burgundy/40 text-sm uppercase tracking-[0.3em]">
                       Poster
                     </span>

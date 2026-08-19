@@ -11,7 +11,7 @@ function doPost(e) {
     }
 
     var data = JSON.parse(e.postData.contents);
-    
+
     var sheetName = "Enquiries";
     if (data.type === "class") {
       sheetName = "Classes";
@@ -52,13 +52,7 @@ function doPost(e) {
         ]);
         sheet.getRange(1, 1, 1, 9).setFontWeight("bold").setBackground("#D2E9E9");
       } else {
-        sheet.appendRow([
-          "Timestamp",
-          "Name",
-          "Email",
-          "Phone",
-          "Message"
-        ]);
+        sheet.appendRow(["Timestamp", "Name", "Email", "Phone", "Message"]);
         sheet.getRange(1, 1, 1, 5).setFontWeight("bold").setBackground("#F5EBEB");
       }
       sheet.setFrozenRows(1);
@@ -90,13 +84,7 @@ function doPost(e) {
         data.format || "",
       ]);
     } else {
-      sheet.appendRow([
-        timestamp,
-        data.name,
-        data.email,
-        data.phone,
-        data.message
-      ]);
+      sheet.appendRow([timestamp, data.name, data.email, data.phone, data.message]);
     }
 
     // Auto-resize columns
@@ -104,8 +92,19 @@ function doPost(e) {
 
     // Send email notification to Admin
     var adminEmail = "debayan.seple@gmail.com";
-    var subject = "New " + (data.type === "class" ? "Registration" : (data.type === "workshop" ? "Workshop Booking" : "Enquiry")) + ": " + 
-      (data.type === "class" ? data.batchName : (data.type === "workshop" ? data.workshopTitle : data.name));
+    var subject =
+      "New " +
+      (data.type === "class"
+        ? "Registration"
+        : data.type === "workshop"
+          ? "Workshop Booking"
+          : "Enquiry") +
+      ": " +
+      (data.type === "class"
+        ? data.batchName
+        : data.type === "workshop"
+          ? data.workshopTitle
+          : data.name);
 
     var adminBody = "Hello Nritya Academy Admin,\n\n";
     adminBody += "A new submission has been received and logged in the Google Sheet.\n\n";
@@ -148,16 +147,21 @@ function doPost(e) {
     // Send confirmation email to the student / user
     var studentEmail = data.email;
     var studentName = data.type === "class" ? data.student : data.name;
-    var studentSubject = data.type === "enquiry" ? "Thank you for reaching out - Nritya Dance Academy" : "Your Registration at Nritya Dance Academy";
+    var studentSubject =
+      data.type === "enquiry"
+        ? "Thank you for reaching out - Nritya Dance Academy"
+        : "Your Registration at Nritya Dance Academy";
 
     var studentBody = "Dear " + studentName + ",\n\n";
     if (data.type === "enquiry") {
-      studentBody += "Thank you for reaching out to Nritya Dance Academy! We have successfully received your enquiry.\n\n";
+      studentBody +=
+        "Thank you for reaching out to Nritya Dance Academy! We have successfully received your enquiry.\n\n";
       studentBody += "Here is a copy of the message you sent us:\n";
       studentBody += "--------------------------------------\n";
       studentBody += "Message: " + data.message + "\n";
       studentBody += "--------------------------------------\n\n";
-      studentBody += "Our team will review your enquiry and get back to you via WhatsApp/Email within 24 hours.\n\n";
+      studentBody +=
+        "Our team will review your enquiry and get back to you via WhatsApp/Email within 24 hours.\n\n";
     } else {
       studentBody += "Thank you for registering at Nritya Dance Academy!\n\n";
       studentBody += "We have successfully received your information:\n";
@@ -171,7 +175,8 @@ function doPost(e) {
         studentBody += "Date: " + (data.date || "N/A") + "\n";
       }
       studentBody += "--------------------------------------\n\n";
-      studentBody += "Our team will review your application and get in touch with you via WhatsApp/Email within 24 hours to confirm your schedule and enrollment details.\n\n";
+      studentBody +=
+        "Our team will review your application and get in touch with you via WhatsApp/Email within 24 hours to confirm your schedule and enrollment details.\n\n";
     }
     studentBody += "If you have any questions, feel free to reply directly to this email.\n\n";
     studentBody += "Best regards,\n";

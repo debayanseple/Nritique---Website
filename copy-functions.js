@@ -1,5 +1,5 @@
-import fs from 'fs';
-import path from 'path';
+import fs from "fs";
+import path from "path";
 
 function copyDir(src, dest) {
   fs.mkdirSync(dest, { recursive: true });
@@ -17,8 +17,8 @@ function copyDir(src, dest) {
   }
 }
 
-const srcDir = path.resolve('.netlify/functions-internal/server');
-const destDir = path.resolve('netlify/functions/server');
+const srcDir = path.resolve(".netlify/functions-internal/server");
+const destDir = path.resolve("netlify/functions/server");
 
 console.log(`Copying from ${srcDir} to ${destDir}...`);
 try {
@@ -27,11 +27,11 @@ try {
   }
   if (fs.existsSync(srcDir)) {
     copyDir(srcDir, destDir);
-    console.log('Successfully copied functions!');
+    console.log("Successfully copied functions!");
   } else {
-    console.error('Source functions directory does not exist!');
+    console.error("Source functions directory does not exist!");
   }
 } catch (err) {
-  console.error('Error copying functions:', err);
+  console.error("Error copying functions:", err);
   process.exit(1);
 }

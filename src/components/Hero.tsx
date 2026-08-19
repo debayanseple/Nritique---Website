@@ -17,8 +17,14 @@ export function Hero() {
             <span className="text-xs uppercase tracking-[0.3em]">Background Video</span>
           </div>
         </div>
-        <Mandala className="absolute -top-24 -left-24 text-gold/15 max-w-[280px] sm:max-w-none" size={520} />
-        <Mandala className="absolute -bottom-32 -right-24 text-gold/10 max-w-[320px] sm:max-w-none" size={620} />
+        <Mandala
+          className="absolute -top-24 -left-24 text-gold/15 max-w-[280px] sm:max-w-none"
+          size={520}
+        />
+        <Mandala
+          className="absolute -bottom-32 -right-24 text-gold/10 max-w-[320px] sm:max-w-none"
+          size={620}
+        />
         <div className="absolute inset-0 bg-gradient-to-b from-charcoal/70 via-charcoal/75 to-charcoal/95" />
       </div>
 

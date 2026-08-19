@@ -3,7 +3,16 @@ import { motion } from "framer-motion";
 import { Ornament } from "./Ornament";
 import { fetchLiveWorkshops } from "../lib/api/workshops.functions";
 
-const COLORS = ["#6B1E2A", "#C9A84C", "#1C1C1E", "#8B2A38", "#A8893C", "#4A1520", "#D4B45C", "#6B1E2A"];
+const COLORS = [
+  "#6B1E2A",
+  "#C9A84C",
+  "#1C1C1E",
+  "#8B2A38",
+  "#A8893C",
+  "#4A1520",
+  "#D4B45C",
+  "#6B1E2A",
+];
 const ROTATIONS = [-6, 4, -3, 5, -5, 3, -4, 6];
 
 export function Gallery() {
@@ -45,7 +54,9 @@ export function Gallery() {
           className="text-center mb-14"
         >
           <span className="text-gold uppercase tracking-[0.3em] text-xs">In Frame</span>
-          <h2 className="font-display text-3xl sm:text-4xl md:text-5xl text-burgundy mt-3">Workshop Moments</h2>
+          <h2 className="font-display text-3xl sm:text-4xl md:text-5xl text-burgundy mt-3">
+            Workshop Moments
+          </h2>
           <Ornament className="mt-5" />
         </motion.div>
       </div>

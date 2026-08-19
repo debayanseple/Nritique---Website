@@ -32,13 +32,22 @@ export function Footer() {
               NRITYA <span className="text-[#c9a84c]">✦</span> Classical
             </h3>
             <p className="text-sm leading-relaxed">
-              A Kathak &amp; semi-classical academy in Kolkata, WestBengal — teaching the Indian Classical with care since 2009.
+              A Kathak &amp; semi-classical academy in Kolkata, WestBengal — teaching the Indian
+              Classical with care since 2009.
             </p>
             <div className="flex gap-3 mt-5">
-              <a href="https://www.instagram.com/srijita_baidya/" aria-label="Instagram" className="hover:text-[#c9a84c] transition">
+              <a
+                href="https://www.instagram.com/srijita_baidya/"
+                aria-label="Instagram"
+                className="hover:text-[#c9a84c] transition"
+              >
                 <Instagram size={18} />
               </a>
-              <a href="https://www.youtube.com/@SrijitaBaidya" aria-label="YouTube" className="hover:text-[#c9a84c] transition">
+              <a
+                href="https://www.youtube.com/@SrijitaBaidya"
+                aria-label="YouTube"
+                className="hover:text-[#c9a84c] transition"
+              >
                 <Youtube size={18} />
               </a>
               <a href="#" aria-label="WhatsApp" className="hover:text-[#c9a84c] transition">

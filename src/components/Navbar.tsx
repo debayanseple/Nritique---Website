@@ -53,16 +53,18 @@ export function Navbar() {
       <nav className="max-w-7xl mx-auto px-4 sm:px-5 lg:px-10 h-16 flex items-center justify-between">
         <Link
           to="/"
-          className={`font-display text-xl tracking-wide flex items-baseline gap-1.5 ${
-            transparent ? "text-cream" : "text-burgundy"
-          }`}
+          className="flex items-center"
+          aria-label="Nritya Dance Academy home"
         >
-          <span style={{ fontFamily: '"Tiro Bangla", serif' }} className="text-gold text-base">
-            নৃত্য
-          </span>
-          <span>
-            Nritya<span className="text-gold">.</span>
-          </span>
+          <img
+            src={
+              transparent
+                ? "/images/workshops/Inverted-logo.svg"
+                : "/images/workshops/logo.svg"
+            }
+            alt="Nritya Dance Academy"
+            className="h-10 w-auto object-contain"
+          />
         </Link>
 
         <ul className="hidden md:flex items-center gap-7">

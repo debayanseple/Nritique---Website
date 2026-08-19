@@ -29,8 +29,14 @@ function WorkshopsPage() {
       <Navbar />
       <main className="flex-1">
         <header className="relative pt-24 sm:pt-32 pb-10 sm:pb-12 px-4 sm:px-5 lg:px-10 bg-charcoal text-cream overflow-hidden">
-          <Mandala className="absolute -top-24 -left-20 text-gold/15 max-w-[260px] sm:max-w-none" size={460} />
-          <Mandala className="absolute -bottom-28 -right-16 text-gold/10 max-w-[280px] sm:max-w-none" size={520} />
+          <Mandala
+            className="absolute -top-24 -left-20 text-gold/15 max-w-[260px] sm:max-w-none"
+            size={460}
+          />
+          <Mandala
+            className="absolute -bottom-28 -right-16 text-gold/10 max-w-[280px] sm:max-w-none"
+            size={520}
+          />
           <div className="relative max-w-4xl mx-auto text-center">
             <span
               className="block text-gold text-xl sm:text-2xl mb-3"

@@ -50,7 +50,9 @@ export function Contact() {
           className="text-center mb-14"
         >
           <span className="text-gold uppercase tracking-[0.3em] text-xs">Get In Touch</span>
-          <h2 className="font-display text-3xl sm:text-4xl md:text-5xl text-burgundy mt-3">Visit Our Studio</h2>
+          <h2 className="font-display text-3xl sm:text-4xl md:text-5xl text-burgundy mt-3">
+            Visit Our Studio
+          </h2>
         </motion.div>
 
         <div className="grid md:grid-cols-2 gap-12">
@@ -109,10 +111,10 @@ export function Contact() {
                 {error}
               </div>
             )}
-            <Field 
-              label="Name" 
-              value={form.name} 
-              onChange={(v) => setForm({ ...form, name: v })} 
+            <Field
+              label="Name"
+              value={form.name}
+              onChange={(v) => setForm({ ...form, name: v })}
               disabled={isSubmitting}
             />
             <Field

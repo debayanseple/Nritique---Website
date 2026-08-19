@@ -20,10 +20,10 @@ export function About() {
           <h2 className="font-display text-3xl sm:text-4xl md:text-5xl mt-3">Srijita Baidya</h2>
           <div className="mt-6 space-y-4 text-cream/80 leading-relaxed">
             <p>
-              I built two lives in parallel — one at 35,000 feet as a cabin crew with
-              IndiGo, and one on screen, where her honest, behind-the-scenes look at aviation
-              quietly became a movement. Bold, articulate, and genuinely herself, she reached
-              1 million subscribers in just over a year — one of the fastest rises in her space.
+              I built two lives in parallel — one at 35,000 feet as a cabin crew with IndiGo, and
+              one on screen, where her honest, behind-the-scenes look at aviation quietly became a
+              movement. Bold, articulate, and genuinely herself, she reached 1 million subscribers
+              in just over a year — one of the fastest rises in her space.
             </p>
             <p>
               But dance was always the deeper pull. She left her career in aviation to pursue it
@@ -31,12 +31,10 @@ export function About() {
               skies she now brings to the studio: rigorous, expressive, and unhurried.
             </p>
             <p>
-              Nritique is where that journey lives — a space built for dancers who are serious
-              about their craft, wherever they are starting from.
+              Nritique is where that journey lives — a space built for dancers who are serious about
+              their craft, wherever they are starting from.
             </p>
-            <p className="text-gold italic font-display text-lg">
-              — Founder
-            </p>
+            <p className="text-gold italic font-display text-lg">— Founder</p>
           </div>
         </motion.div>
 
