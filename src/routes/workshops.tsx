@@ -28,7 +28,7 @@ function WorkshopsPage() {
     <div className="bg-cream text-charcoal min-h-screen flex flex-col">
       <Navbar />
       <main className="flex-1">
-        <header className="relative pt-24 sm:pt-32 pb-10 sm:pb-12 px-4 sm:px-5 lg:px-10 bg-charcoal text-cream overflow-hidden">
+        <header className="relative pt-24 sm:pt-32 pb-10 sm:pb-12 px-4 sm:px-5 lg:px-10 bg-[#5c1a1a] text-cream overflow-hidden">
           <Mandala
             className="absolute -top-24 -left-20 text-gold/15 max-w-[260px] sm:max-w-none"
             size={460}

@@ -7,10 +7,10 @@ export function Hero() {
   return (
     <section
       id="hero"
-      className="relative min-h-screen flex items-center justify-center overflow-hidden"
+      className="relative min-h-screen pt-24 flex items-center justify-center overflow-hidden"
     >
       {/* Video placeholder + mandala watermarks */}
-      <div className="absolute inset-0 bg-charcoal">
+      <div className="absolute inset-0 bg-burgundy">
         <div className="absolute inset-0 flex items-center justify-center opacity-10">
           <div className="flex flex-col items-center gap-3 text-cream/40">
             <Play size={56} />
@@ -25,7 +25,7 @@ export function Hero() {
           className="absolute -bottom-32 -right-24 text-gold/10 max-w-[320px] sm:max-w-none"
           size={620}
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-charcoal/70 via-charcoal/75 to-charcoal/95" />
+        <div className="absolute inset-0 bg-gradient-to-b from-burgundy/70 via-burgundy/75 to-burgundy/95" />
       </div>
 
       <motion.div
