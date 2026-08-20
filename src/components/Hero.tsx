@@ -6,7 +6,7 @@ export function Hero() {
   return (
     <section
       id="hero"
-      className="relative min-h-screen pt-24 flex items-center justify-center overflow-hidden"
+      className="relative min-h-screen pt-20 flex items-center justify-center overflow-hidden"
     >
       {/* Video placeholder + mandala watermarks */}
       <div className="absolute inset-0 bg-burgundy">
