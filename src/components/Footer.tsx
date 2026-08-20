@@ -50,7 +50,13 @@ export function Footer() {
               >
                 <Youtube size={18} />
               </a>
-              <a href="#" aria-label="WhatsApp" className="hover:text-[#c9a84c] transition">
+              <a
+                href="https://wa.me/918420477096"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="WhatsApp"
+                className="hover:text-[#c9a84c] transition"
+              >
                 <MessageCircle size={18} />
               </a>
             </div>
