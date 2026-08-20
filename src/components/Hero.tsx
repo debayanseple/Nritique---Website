@@ -9,7 +9,9 @@ export function Hero() {
       className="relative min-h-[100dvh] pt-14 sm:pt-20 flex items-center justify-center overflow-hidden"
     >
       {/* Video placeholder + mandala watermarks */}
-      <div className="absolute inset-0 bg-cream">
+      <div className="absolute inset-0 bg-gradient-to-b from-[#fdf8ef] via-[#faf7f2] to-[#f3ebdd]">
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_75%_60%_at_50%_0%,rgba(201,168,76,0.25),transparent_65%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_90%_55%_at_50%_115%,rgba(107,30,42,0.10),transparent_60%)]" />
         <div className="absolute inset-0 flex items-center justify-center opacity-10">
           <div className="flex flex-col items-center gap-3 text-charcoal/40">
             <Play size={56} />
@@ -17,14 +19,13 @@ export function Hero() {
           </div>
         </div>
         <Mandala
-          className="absolute -top-24 -left-24 text-gold/20 max-w-[280px] sm:max-w-none"
+          className="absolute -top-24 -left-24 text-gold/25 max-w-[280px] sm:max-w-none"
           size={520}
         />
         <Mandala
-          className="absolute -bottom-32 -right-24 text-gold/15 max-w-[320px] sm:max-w-none"
+          className="absolute -bottom-32 -right-24 text-gold/20 max-w-[320px] sm:max-w-none"
           size={620}
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-cream" />
       </div>
 
       <motion.div

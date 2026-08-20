@@ -1,10 +1,34 @@
-import { motion } from "framer-motion";
+import { useEffect, useRef, useState } from "react";
+import { animate, motion, useInView } from "framer-motion";
 
 const stats = [
-  { value: "500+", label: "Students Trained" },
-  { value: "12", label: "Years of Excellence" },
-  { value: "30+", label: "Workshops Conducted" },
+  { value: 500, suffix: "+", label: "Students Trained" },
+  { value: 12, suffix: "", label: "Years of Excellence" },
+  { value: 30, suffix: "+", label: "Workshops Conducted" },
 ];
+
+function StatCounter({ value, suffix }: { value: number; suffix?: string }) {
+  const ref = useRef<HTMLDivElement>(null);
+  const inView = useInView(ref, { once: true, margin: "-40px" });
+  const [count, setCount] = useState(0);
+
+  useEffect(() => {
+    if (!inView) return;
+    const controls = animate(0, value, {
+      duration: 1.6,
+      ease: "easeOut",
+      onUpdate: (v) => setCount(Math.round(v)),
+    });
+    return () => controls.stop();
+  }, [inView, value]);
+
+  return (
+    <div ref={ref} className="font-display text-4xl sm:text-3xl md:text-5xl text-gold">
+      {count}
+      {suffix}
+    </div>
+  );
+}
 
 export function About() {
   return (
@@ -66,7 +90,7 @@ export function About() {
             transition={{ delay: i * 0.1, duration: 0.6 }}
             className="text-center border-t border-cream/20 pt-8"
           >
-            <div className="font-display text-4xl sm:text-3xl md:text-5xl text-gold">{s.value}</div>
+            <StatCounter value={s.value} suffix={s.suffix} />
             <div className="mt-2 text-xs sm:text-sm uppercase tracking-wider text-cream/70">
               {s.label}
             </div>
