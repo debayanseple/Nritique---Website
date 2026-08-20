@@ -120,16 +120,19 @@ export function Footer() {
 
         <div className="mt-10 pt-6 border-t border-[#e8d5b0]/15 flex flex-col sm:flex-row justify-between items-center gap-2 text-xs text-[#e8d5b0]/50">
           <span>© {new Date().getFullYear()} Nritique Dance Classes. All rights reserved.</span>
-          <span className="flex items-center gap-1">
-            Kolkata, WestBengal · hello@nritique.in ·{" "}
-            <a
-              href="https://zerotheorys.lovable.app"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="underline hover:text-[#c9a84c] transition"
-            >
-              powered by ZeroTheorys
-            </a>
+          <span className="flex flex-col sm:flex-row items-center gap-1 text-center">
+            <span>Kolkata, WestBengal · hello@nritique.in</span>
+            <span className="flex items-center gap-1">
+              <span className="hidden sm:inline">·</span>
+              <a
+                href="https://zerotheorys.lovable.app"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="underline hover:text-[#c9a84c] transition"
+              >
+                powered by ZeroTheorys
+              </a>
+            </span>
           </span>
         </div>
       </div>

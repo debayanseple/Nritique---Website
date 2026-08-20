@@ -62,7 +62,7 @@ export function Hero() {
           transition={{ duration: 2.2, repeat: Infinity, ease: "easeInOut" }}
           className="text-charcoal/70 text-[11px] sm:text-xs uppercase tracking-[0.3em]"
         >
-          Scroll to explore
+          Explore Classes &amp; Workshops
         </motion.span>
         <motion.div
           animate={{ y: [0, 8, 0] }}

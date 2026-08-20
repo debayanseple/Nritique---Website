@@ -36,11 +36,7 @@ export function Navbar() {
   return (
     <header className="fixed top-0 inset-x-0 z-40 transition-all bg-cream/85 backdrop-blur-md border-b border-gold/20">
       <nav className="max-w-7xl mx-auto px-4 sm:px-5 lg:px-10 h-16 flex items-center justify-between">
-        <Link
-          to="/"
-          className="flex items-center"
-          aria-label="Nritya Dance Academy home"
-        >
+        <Link to="/" className="flex items-center" aria-label="Nritya Dance Academy home">
           <img
             src="/images/logo.webp"
             alt="Nritya Dance Academy"
