@@ -14,18 +14,10 @@ const items: Item[] = [
 ];
 
 export function Navbar() {
-  const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
   const pathname = useRouterState({ select: (s) => s.location.pathname });
   const navigate = useNavigate();
   const isHome = pathname === "/";
-
-  useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 20);
-    onScroll();
-    window.addEventListener("scroll", onScroll);
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
 
   // Close mobile menu on route change
   useEffect(() => {
@@ -41,15 +33,8 @@ export function Navbar() {
     }
   };
 
-  // Solid background unless we're on the home page hero
-  const transparent = isHome && !scrolled;
-
   return (
-    <header
-      className={`fixed top-0 inset-x-0 z-40 transition-all ${
-        transparent ? "bg-transparent" : "bg-cream/85 backdrop-blur-md border-b border-gold/20"
-      }`}
-    >
+    <header className="fixed top-0 inset-x-0 z-40 transition-all bg-cream/85 backdrop-blur-md border-b border-gold/20">
       <nav className="max-w-7xl mx-auto px-4 sm:px-5 lg:px-10 h-16 flex items-center justify-between">
         <Link
           to="/"
@@ -57,11 +42,7 @@ export function Navbar() {
           aria-label="Nritya Dance Academy home"
         >
           <img
-            src={
-              transparent
-                ? "/images/Inverted-logo.webp"
-                : "/images/logo.webp"
-            }
+            src="/images/logo.webp"
             alt="Nritya Dance Academy"
             className="h-10 w-auto object-contain"
           />
@@ -69,9 +50,7 @@ export function Navbar() {
 
         <ul className="hidden md:flex items-center gap-7">
           {items.map((l) => {
-            const base = transparent
-              ? "text-cream/85 hover:text-gold"
-              : "text-charcoal/75 hover:text-burgundy";
+            const base = "text-charcoal/75 hover:text-burgundy";
             return (
               <li key={l.label}>
                 {l.to ? (
@@ -105,7 +84,7 @@ export function Navbar() {
             Register
           </Link>
           <button
-            className={`md:hidden min-w-[44px] min-h-[44px] flex items-center justify-center ${transparent ? "text-cream" : "text-burgundy"}`}
+            className="md:hidden min-w-[44px] min-h-[44px] flex items-center justify-center text-burgundy"
             onClick={() => setOpen(!open)}
             aria-label="Menu"
           >

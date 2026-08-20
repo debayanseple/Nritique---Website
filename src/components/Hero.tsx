@@ -9,22 +9,22 @@ export function Hero() {
       className="relative min-h-[100dvh] pt-14 sm:pt-20 flex items-center justify-center overflow-hidden"
     >
       {/* Video placeholder + mandala watermarks */}
-      <div className="absolute inset-0 bg-burgundy">
+      <div className="absolute inset-0 bg-cream">
         <div className="absolute inset-0 flex items-center justify-center opacity-10">
-          <div className="flex flex-col items-center gap-3 text-cream/40">
+          <div className="flex flex-col items-center gap-3 text-charcoal/40">
             <Play size={56} />
             <span className="text-xs uppercase tracking-[0.3em]">Background Video</span>
           </div>
         </div>
         <Mandala
-          className="absolute -top-24 -left-24 text-gold/15 max-w-[280px] sm:max-w-none"
+          className="absolute -top-24 -left-24 text-gold/20 max-w-[280px] sm:max-w-none"
           size={520}
         />
         <Mandala
-          className="absolute -bottom-32 -right-24 text-gold/10 max-w-[320px] sm:max-w-none"
+          className="absolute -bottom-32 -right-24 text-gold/15 max-w-[320px] sm:max-w-none"
           size={620}
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-burgundy/70 via-burgundy/75 to-burgundy/95" />
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-cream" />
       </div>
 
       <motion.div
@@ -52,7 +52,7 @@ export function Hero() {
         <motion.span
           animate={{ opacity: [0.5, 1, 0.5] }}
           transition={{ duration: 2.2, repeat: Infinity, ease: "easeInOut" }}
-          className="text-cream/80 text-[11px] sm:text-xs uppercase tracking-[0.3em]"
+          className="text-charcoal/70 text-[11px] sm:text-xs uppercase tracking-[0.3em]"
         >
           Scroll to explore
         </motion.span>

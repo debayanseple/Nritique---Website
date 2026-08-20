@@ -36,8 +36,8 @@ const teasers = [
     devanagari: "শিক্ষা",
     body: "Five batches across all ages — Kathak foundations, semi-classical, and stage repertoire.",
     cta: "Explore Classes",
-    bg: "bg-burgundy",
-    tint: "text-cream",
+    bg: "bg-cream",
+    tint: "text-charcoal",
   },
   {
     to: "/workshops" as const,
@@ -59,10 +59,10 @@ function Index() {
         <Hero />
 
         {/* Teasers replacing inline Classes/Workshops sections */}
-        <section className="py-16 sm:py-24 px-4 sm:px-5 lg:px-10 bg-cream">
+        <section className="py-16 sm:py-24 px-4 sm:px-5 lg:px-10 bg-burgundy">
           <div className="max-w-6xl mx-auto text-center mb-12">
             <span className="text-gold uppercase tracking-[0.3em] text-xs">What We Offer</span>
-            <h2 className="font-display text-3xl sm:text-4xl md:text-5xl text-burgundy mt-3">
+            <h2 className="font-display text-3xl sm:text-4xl md:text-5xl text-cream mt-3">
               A Practice for Every Dancer
             </h2>
             <Ornament className="mt-5" />
