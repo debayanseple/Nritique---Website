@@ -39,7 +39,7 @@ export function Hero() {
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 1, ease: "easeOut" }}
-          className="w-full max-w-[240px] sm:max-w-xl md:max-w-2xl max-h-[55dvh] mx-auto h-auto object-contain"
+          className="w-full max-w-[85vw] sm:max-w-xl md:max-w-2xl max-h-[55dvh] mx-auto h-auto object-contain"
         />
       </motion.div>
 
