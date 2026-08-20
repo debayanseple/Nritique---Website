@@ -25,9 +25,9 @@ export function Footer() {
   return (
     <footer className="bg-[#5c1a1a] text-[#e8d5b0]/80">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-10 pt-10 sm:pt-14 pb-8 sm:pb-10">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 sm:gap-10">
           {/* Brand */}
-          <div>
+          <div className="col-span-2 lg:col-span-1">
             <h3 className="font-display text-[#e8d5b0] text-xl tracking-widest flex items-center gap-2 mb-4">
               NRITYA <span className="text-[#c9a84c]">✦</span> Classical
             </h3>
@@ -93,7 +93,7 @@ export function Footer() {
           </div>
 
           {/* Newsletter */}
-          <div>
+          <div className="col-span-2 lg:col-span-1">
             <h4 className="text-[#e8d5b0] text-xs font-semibold uppercase tracking-widest mb-4">
               Stay in the Loop
             </h4>
@@ -120,7 +120,17 @@ export function Footer() {
 
         <div className="mt-10 pt-6 border-t border-[#e8d5b0]/15 flex flex-col sm:flex-row justify-between items-center gap-2 text-xs text-[#e8d5b0]/50">
           <span>© {new Date().getFullYear()} Nritique Dance Classes. All rights reserved.</span>
-          <span>Kolkata, WestBengal · hello@nritique.in</span>
+          <span className="flex items-center gap-1">
+            Kolkata, WestBengal · hello@nritique.in ·{" "}
+            <a
+              href="https://zerotheorys.lovable.app"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="underline hover:text-[#c9a84c] transition"
+            >
+              powered by ZeroTheorys
+            </a>
+          </span>
         </div>
       </div>
     </footer>
