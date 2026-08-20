@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
+import { Calendar } from "lucide-react";
 import { ClassRegisterModal } from "./modals/ClassRegisterModal";
-import { Ornament } from "./Ornament";
+import { Mandala, Ornament } from "./Ornament";
 
 export interface Batch {
   id: string;
@@ -61,6 +62,15 @@ const fade = {
   visible: (i: number) => ({ opacity: 1, y: 0, transition: { delay: i * 0.08, duration: 0.6 } }),
 };
 
+function readableOn(bg: string): string {
+  const hex = bg.replace("#", "");
+  const r = parseInt(hex.slice(0, 2), 16);
+  const g = parseInt(hex.slice(2, 4), 16);
+  const b = parseInt(hex.slice(4, 6), 16);
+  const luminance = 0.299 * r + 0.587 * g + 0.114 * b;
+  return luminance > 150 ? "#1c1c1e" : "#faf7f2";
+}
+
 export function Classes() {
   const [selected, setSelected] = useState<Batch | null>(null);
 
@@ -94,28 +104,44 @@ export function Classes() {
               whileInView="visible"
               viewport={{ once: true }}
               custom={i}
-              className="group rounded-xl bg-card border border-border p-7 hover:shadow-lg transition-shadow flex flex-col"
+              className="group relative overflow-hidden rounded-2xl bg-card border border-border shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col"
             >
-              <div className="flex items-center justify-between mb-4">
+              <div
+                className="relative px-6 sm:px-7 py-5 flex items-center justify-between overflow-hidden"
+                style={{ backgroundColor: b.color }}
+              >
                 <span
-                  className="inline-block rounded-full px-3 py-1 text-xs font-semibold text-cream"
-                  style={{ backgroundColor: b.color }}
+                  className="text-xs font-bold uppercase tracking-[0.25em]"
+                  style={{ color: readableOn(b.color) }}
                 >
                   {b.ageGroup}
                 </span>
-                <span className="h-px flex-1 ml-4 bg-border" />
+                <span
+                  className="font-display text-2xl leading-none"
+                  style={{ color: readableOn(b.color), opacity: 0.5 }}
+                >
+                  ✦
+                </span>
               </div>
-              <h3 className="font-display text-2xl text-charcoal">{b.name}</h3>
-              <p className="text-muted-foreground mt-2 text-sm leading-relaxed flex-1">
-                {b.description}
-              </p>
-              <p className="mt-4 text-xs text-burgundy uppercase tracking-wider">{b.schedule}</p>
-              <button
-                onClick={() => setSelected(b)}
-                className="mt-6 self-start rounded-md bg-burgundy text-cream px-5 py-2 text-sm font-semibold hover:bg-burgundy/90 transition"
-              >
-                Register
-              </button>
+              <div className="relative flex-1 flex flex-col p-6 sm:p-7 pt-6">
+                <Mandala className="absolute -top-8 -right-8 text-gold/10" size={170} />
+                <h3 className="relative font-display text-2xl sm:text-[1.75rem] text-charcoal leading-tight">
+                  {b.name}
+                </h3>
+                <p className="relative text-muted-foreground mt-2 text-sm leading-relaxed flex-1">
+                  {b.description}
+                </p>
+                <div className="relative mt-5 flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-burgundy">
+                  <Calendar size={15} />
+                  {b.schedule}
+                </div>
+                <button
+                  onClick={() => setSelected(b)}
+                  className="relative mt-6 w-full rounded-md bg-burgundy px-5 py-3 text-sm font-semibold text-cream transition-colors hover:bg-gold hover:text-charcoal"
+                >
+                  Register for this batch
+                </button>
+              </div>
             </motion.article>
           ))}
         </div>
