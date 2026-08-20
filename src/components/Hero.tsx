@@ -6,7 +6,7 @@ export function Hero() {
   return (
     <section
       id="hero"
-      className="relative min-h-screen pt-20 flex items-center justify-center overflow-hidden"
+      className="relative min-h-[100dvh] pt-14 sm:pt-20 flex items-center justify-center overflow-hidden"
     >
       {/* Video placeholder + mandala watermarks */}
       <div className="absolute inset-0 bg-burgundy">
@@ -39,7 +39,7 @@ export function Hero() {
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 1, ease: "easeOut" }}
-          className="w-full max-w-xl md:max-w-2xl mx-auto h-auto object-contain"
+          className="w-full max-w-[240px] sm:max-w-xl md:max-w-2xl max-h-[55dvh] mx-auto h-auto object-contain"
         />
       </motion.div>
 
