@@ -15,10 +15,17 @@ This is a TanStack Start, React, and Vite site for Nritya Dance Academy. Applica
 
 Do not edit `src/routeTree.gen.ts`; it is generated from routes. See `src/routes/README.md` before adding routes, especially dynamic segments such as `$id.tsx`.
 
+## Content & Data Sources
+
+- Workshop listings are fetched client-side from public Google Sheets via `gviz/tq?tqx=out:csv` (no auth, CORS-enabled). Hardcoded sheet IDs live in `src/lib/api/workshops.functions.ts`. Rows are matched by header name (case-insensitive) via the `col()` helper: `Cover Photo`, `Status?`, `Seats left`, `Price (INR)`, `Registration link`, `Workshop title`. Renaming a sheet header silently breaks the map (status becomes empty, so workshops drop out). Drive links in `Cover Photo` are converted to `drive.google.com/thumbnail?...` URLs.
+- Despite the `.functions.ts` suffix, `fetchLiveWorkshops` is a plain async function that runs in the browser (used as a react-query `queryFn`), not a `createServerFn`. Only `submitRegistration` in `register.functions.ts` is a real server function.
+- Registrations/enquiries (`submitRegistration`, `createServerFn` POST) post to a Google Apps Script Web App whose URL is `GOOGLE_SCRIPT_URL` (set in `.env`); without it the handler simulates success so dev works offline. `google-apps-script.js` at the repo root is the standalone Apps Script to paste into Google Sheets (Extensions > Apps Script) — it is not part of the app build and is not bundled anywhere.
+
 ## Build, Test, and Development Commands
 
 - `npm ci` installs the lockfile-pinned dependencies. Use npm, not bun — both `package-lock.json` and `bun.lock` exist; keep them in sync only if bun is introduced intentionally. `bunfig.toml` blocks packages newer than 24h (supply-chain guard) unless explicitly bypassed.
 - `npm run dev` starts the local Vite development server.
+- `npm run build:dev` builds with `vite build --mode development` (skips the `copy-functions.js` step).
 - `npm run lint` checks TypeScript/React code with ESLint and Prettier rules.
 - `npm run format` formats supported files with Prettier.
 - Verification order: `npm run lint` then `npm run build` (no test suite exists).

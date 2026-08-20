@@ -1,7 +1,6 @@
 import { motion } from "framer-motion";
-import { Play } from "lucide-react";
-import { Link } from "@tanstack/react-router";
-import { Mandala, Ornament } from "./Ornament";
+import { ChevronDown, Play } from "lucide-react";
+import { Mandala } from "./Ornament";
 
 export function Hero() {
   return (
@@ -34,38 +33,36 @@ export function Hero() {
         transition={{ duration: 0.9, ease: "easeOut" }}
         className="relative z-10 text-center max-w-3xl px-5"
       >
-        <span
-          className="block text-gold text-xl sm:text-2xl md:text-3xl mb-3"
-          style={{ fontFamily: '"Tiro Bangla", serif' }}
+        <motion.img
+          src="/images/Full-logo.webp"
+          alt="Nritya Dance Academy"
+          initial={{ opacity: 0, scale: 0.9 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 1, ease: "easeOut" }}
+          className="w-full max-w-xl md:max-w-2xl mx-auto h-auto object-contain"
+        />
+      </motion.div>
+
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 1.2, duration: 1 }}
+        className="absolute bottom-6 inset-x-0 z-10 flex flex-col items-center gap-2"
+      >
+        <motion.span
+          animate={{ opacity: [0.5, 1, 0.5] }}
+          transition={{ duration: 2.2, repeat: Infinity, ease: "easeInOut" }}
+          className="text-cream/80 text-[11px] sm:text-xs uppercase tracking-[0.3em]"
         >
-          নৃত্যং ভাবস্য ভাষা
-        </span>
-        <span className="inline-block text-gold uppercase tracking-[0.4em] text-xs mb-6">
-          Kathak · Semi-Classical
-        </span>
-        <h1 className="font-display text-3xl sm:text-5xl md:text-7xl text-cream leading-tight">
-          Where Tradition <br className="hidden sm:block" />
-          <span className="text-gold italic">Meets Expression</span>
-        </h1>
-        <Ornament className="my-7" />
-        <p className="text-cream/80 text-base sm:text-lg max-w-xl mx-auto leading-relaxed">
-          A gurukul-rooted academy of Kathak &amp; Semi-Classical dance — taught with reverence for
-          the tradition and the freedom of every dancer's voice.
-        </p>
-        <div className="mt-8 sm:mt-10 pb-4 sm:pb-0 flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center">
-          <Link
-            to="/classes"
-            className="rounded-md bg-gold px-6 py-3 text-charcoal font-semibold hover:bg-gold/90 transition border border-gold/70"
-          >
-            Explore Classes
-          </Link>
-          <Link
-            to="/workshops"
-            className="rounded-md border border-cream/30 px-6 py-3 text-cream font-semibold hover:bg-cream/10 transition"
-          >
-            View Workshops
-          </Link>
-        </div>
+          Scroll to explore
+        </motion.span>
+        <motion.div
+          animate={{ y: [0, 8, 0] }}
+          transition={{ duration: 1.6, repeat: Infinity, ease: "easeInOut" }}
+          className="text-gold"
+        >
+          <ChevronDown size={26} />
+        </motion.div>
       </motion.div>
     </section>
   );

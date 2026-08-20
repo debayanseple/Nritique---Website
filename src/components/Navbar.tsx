@@ -59,8 +59,8 @@ export function Navbar() {
           <img
             src={
               transparent
-                ? "/images/Inverted-logo.svg"
-                : "/images/logo.svg"
+                ? "/images/Inverted-logo.webp"
+                : "/images/logo.webp"
             }
             alt="Nritya Dance Academy"
             className="h-10 w-auto object-contain"
