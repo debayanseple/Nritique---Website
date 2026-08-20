@@ -59,7 +59,7 @@ function Index() {
         <Hero />
 
         {/* Teasers replacing inline Classes/Workshops sections */}
-        <section className="py-16 sm:py-24 px-4 sm:px-5 lg:px-10 bg-burgundy">
+        <section className="min-h-[100dvh] flex flex-col justify-center py-16 sm:py-24 px-4 sm:px-5 lg:px-10 bg-burgundy">
           <div className="max-w-6xl mx-auto text-center mb-12">
             <span className="text-gold uppercase tracking-[0.3em] text-xs">What We Offer</span>
             <h2 className="font-display text-3xl sm:text-4xl md:text-5xl text-cream mt-3">

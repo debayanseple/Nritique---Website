@@ -3,6 +3,10 @@ import { ChevronDown, Play } from "lucide-react";
 import { Mandala } from "./Ornament";
 
 export function Hero() {
+  const scrollToNext = () => {
+    document.getElementById("hero")?.nextElementSibling?.scrollIntoView({ behavior: "smooth" });
+  };
+
   return (
     <section
       id="hero"
@@ -48,7 +52,10 @@ export function Hero() {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 1.2, duration: 1 }}
-        className="absolute bottom-6 inset-x-0 z-10 flex flex-col items-center gap-2"
+        onClick={scrollToNext}
+        className="absolute bottom-6 inset-x-0 z-10 flex flex-col items-center gap-2 cursor-pointer"
+        role="button"
+        aria-label="Scroll to next section"
       >
         <motion.span
           animate={{ opacity: [0.5, 1, 0.5] }}
