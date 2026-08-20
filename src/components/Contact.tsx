@@ -78,7 +78,7 @@ export function Contact() {
               <Phone className="text-gold shrink-0 mt-1" />
               <div>
                 <h4 className="font-semibold text-charcoal">Phone</h4>
-                <p className="text-muted-foreground text-sm mt-1">+91 98300 12345</p>
+                <p className="text-muted-foreground text-sm mt-1">+91 84204 77096</p>
               </div>
             </div>
             <div className="flex gap-4">
@@ -89,7 +89,7 @@ export function Contact() {
               </div>
             </div>
             <a
-              href="https://wa.me/919830012345"
+              href="https://wa.me/918420477096"
               target="_blank"
               rel="noreferrer"
               className="inline-flex sm:inline-flex w-full sm:w-auto justify-center items-center gap-2 rounded-md bg-burgundy text-cream px-5 py-3 font-semibold hover:bg-burgundy/90 transition"
