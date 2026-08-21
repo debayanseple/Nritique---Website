@@ -22,14 +22,24 @@ function col(row: Record<string, string>, key: string): string {
   return found !== undefined ? row[found].trim() : "";
 }
 
-// Handles /file/d/ID/view and ?id=ID / open?id=ID Drive URL formats.
-// Uses thumbnail endpoint which works more reliably for public Drive files in <img> tags.
+// Handles multiple Google Drive URL formats and converts to direct image URLs
+// that work in <img> tags (avoiding ORB blocking).
+// Supported formats:
+// - https://drive.google.com/file/d/FILE_ID/view
+// - https://drive.google.com/open?id=FILE_ID
+// - https://drive.google.com/uc?id=FILE_ID
+// - https://drive.google.com/uc?export=view&id=FILE_ID
+// - https://lh3.googleusercontent.com/... (already direct)
 function toDirectUrl(url: string): string {
-  const byPath = url.match(/\/file\/d\/([^/?]+)/);
-  if (byPath) return `https://drive.google.com/thumbnail?id=${byPath[1]}&sz=w800`;
-  const byParam = url.match(/[?&]id=([^&]+)/);
-  if (byParam) return `https://drive.google.com/thumbnail?id=${byParam[1]}&sz=w800`;
-  return url;
+  // Already a direct lh3 URL
+  if (url.includes("lh3.googleusercontent.com")) return url;
+
+  const fileId = url.match(/\/file\/d\/([^/?]+)/)?.[1] ?? url.match(/[?&]id=([^&]+)/)?.[1];
+
+  if (!fileId) return url;
+
+  // Use uc?export=view which works for all Drive file ID formats
+  return `https://drive.google.com/uc?export=view&id=${fileId}`;
 }
 
 function parseCSV(text: string): Record<string, string>[] {
