@@ -1,7 +1,7 @@
 import { useState, useMemo } from "react";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { motion } from "framer-motion";
-import { MapPin, Users } from "lucide-react";
+import { MapPin, Users, Calendar, Clock, BadgeCheck } from "lucide-react";
 import { WorkshopRegisterModal } from "./modals/WorkshopRegisterModal";
 import { Ornament } from "./Ornament";
 import { fetchLiveWorkshops } from "../lib/api/workshops.functions";
@@ -9,7 +9,22 @@ import type { Workshop } from "../lib/api/workshops.functions";
 
 export type { Workshop };
 
-const tabs = ["All", "Online", "Offline"] as const;
+const tabs = ["All", "Live", "Upcoming", "Expired", "Online", "Offline"] as const;
+
+function formatDate(dateStr?: string): string {
+  if (!dateStr) return "";
+  try {
+    const parts = dateStr.split("/").map((p) => parseInt(p, 10));
+    if (parts.length === 3) {
+      const date = new Date(parts[2], parts[1] - 1, parts[0]);
+      return date.toLocaleDateString("en-IN", { day: "numeric", month: "short", year: "numeric" });
+    }
+    const date = new Date(dateStr);
+    return date.toLocaleDateString("en-IN", { day: "numeric", month: "short", year: "numeric" });
+  } catch {
+    return dateStr;
+  }
+}
 
 export function Workshops() {
   const queryClient = useQueryClient();
@@ -29,6 +44,9 @@ export function Workshops() {
 
   const filtered = useMemo(() => {
     if (tab === "All") return workshops;
+    if (tab === "Live") return workshops.filter((w) => w.status === "live");
+    if (tab === "Upcoming") return workshops.filter((w) => w.status === "upcoming");
+    if (tab === "Expired") return workshops.filter((w) => w.status === "expired");
     return workshops.filter((w) => w.mode === tab);
   }, [tab, workshops]);
 
@@ -103,7 +121,13 @@ export function Workshops() {
                     <img
                       src={w.poster}
                       alt={`${w.title} poster`}
-                      className={`w-full h-full object-cover ${w.status === "upcoming" ? "opacity-50" : ""}`}
+                      className={`w-full h-full object-cover ${
+                        w.status === "upcoming"
+                          ? "opacity-50"
+                          : w.status === "expired"
+                            ? "opacity-30 grayscale"
+                            : ""
+                      }`}
                       onError={(e) => {
                         (e.currentTarget as HTMLImageElement).style.display = "none";
                         e.currentTarget.nextElementSibling?.classList.remove("hidden");
@@ -121,6 +145,20 @@ export function Workshops() {
                     <div className="absolute inset-0 flex items-center justify-center bg-charcoal/30">
                       <span className="bg-gold text-charcoal text-xs font-bold uppercase tracking-widest px-3 py-1 rounded-full">
                         Coming Soon
+                      </span>
+                    </div>
+                  )}
+                  {w.status === "expired" && (
+                    <div className="absolute inset-0 flex items-center justify-center bg-charcoal/50">
+                      <span className="bg-charcoal/80 text-cream text-xs font-bold uppercase tracking-widest px-3 py-1 rounded-full">
+                        Expired
+                      </span>
+                    </div>
+                  )}
+                  {w.status === "live" && (
+                    <div className="absolute top-3 left-3">
+                      <span className="bg-burgundy text-cream text-xs font-bold uppercase tracking-widest px-2 py-1 rounded-full flex items-center gap-1">
+                        <BadgeCheck size={10} /> Live
                       </span>
                     </div>
                   )}
@@ -147,6 +185,18 @@ export function Workshops() {
                         <MapPin size={14} /> {w.location}
                       </p>
                     )}
+                    {(w.date || w.time) && (
+                      <p className="flex items-center gap-2">
+                        <Calendar size={14} />
+                        {w.date && formatDate(w.date)}
+                        {w.time && (
+                          <>
+                            <span className="mx-1">·</span>
+                            <Clock size={14} /> {w.time}
+                          </>
+                        )}
+                      </p>
+                    )}
                     <p className="flex items-center gap-2">
                       <Users size={14} /> {w.seatsLeft} seats left
                     </p>
@@ -158,6 +208,10 @@ export function Workshops() {
                     {w.status === "upcoming" ? (
                       <span className="rounded-md bg-charcoal/10 text-charcoal/50 px-4 py-2 text-sm font-semibold">
                         Coming Soon
+                      </span>
+                    ) : w.status === "expired" ? (
+                      <span className="rounded-md bg-charcoal/10 text-charcoal/50 px-4 py-2 text-sm font-semibold">
+                        Expired
                       </span>
                     ) : w.registrationLink ? (
                       <a

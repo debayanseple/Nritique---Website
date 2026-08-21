@@ -8,7 +8,10 @@ export interface Workshop {
   fee: number;
   poster?: string;
   registrationLink?: string;
-  status: "live" | "upcoming";
+  status: "live" | "upcoming" | "expired";
+  date?: string;
+  time?: string;
+  dateObj?: Date;
 }
 
 const SHEET_ID = "1M4XNi6tMzFiYHyp4j5Dw56DAmLEEIFMPA-s-SJzwelA";
@@ -40,6 +43,47 @@ function toDirectUrl(url: string): string {
 
   // Use uc?export=view which works for all Drive file ID formats
   return `https://drive.google.com/uc?export=view&id=${fileId}`;
+}
+
+function parseDateTime(dateStr: string, timeStr: string): Date | undefined {
+  if (!dateStr) return undefined;
+  try {
+    // Try parsing various date formats: DD/MM/YYYY, MM/DD/YYYY, YYYY-MM-DD, etc.
+    let date: Date;
+    if (dateStr.includes("/")) {
+      const parts = dateStr.split("/").map((p) => parseInt(p, 10));
+      if (parts.length === 3) {
+        // Assume DD/MM/YYYY if first part > 12, else MM/DD/YYYY
+        if (parts[0] > 12) {
+          date = new Date(parts[2], parts[1] - 1, parts[0]);
+        } else {
+          date = new Date(parts[2], parts[0] - 1, parts[1]);
+        }
+      } else {
+        return undefined;
+      }
+    } else if (dateStr.includes("-")) {
+      date = new Date(dateStr);
+    } else {
+      return undefined;
+    }
+
+    // Add time if provided
+    if (timeStr) {
+      const timeMatch = timeStr.match(/(\d{1,2}):(\d{2})\s*(AM|PM)?/i);
+      if (timeMatch) {
+        let hours = parseInt(timeMatch[1], 10);
+        const minutes = parseInt(timeMatch[2], 10);
+        const ampm = timeMatch[3]?.toUpperCase();
+        if (ampm === "PM" && hours !== 12) hours += 12;
+        if (ampm === "AM" && hours === 12) hours = 0;
+        date.setHours(hours, minutes, 0, 0);
+      }
+    }
+    return date;
+  } catch {
+    return undefined;
+  }
 }
 
 function parseCSV(text: string): Record<string, string>[] {
@@ -118,11 +162,9 @@ export async function fetchLiveWorkshops(): Promise<Workshop[]> {
   ]);
   if (!workshopsRes.ok) throw new Error(`Sheet fetch failed: ${workshopsRes.status}`);
   const rows = parseCSV(await workshopsRes.text());
-  return rows
-    .filter((r) => {
-      const s = col(r, "Status?").toLowerCase();
-      return s === "live" || s === "upcoming";
-    })
+  const now = new Date();
+
+  const workshops = rows
     .map((r, i): Workshop => {
       const imageRaw = col(r, "Workshop image") || col(r, "Cover Photo");
       const regLink = col(r, "Registration link");
@@ -130,6 +172,22 @@ export async function fetchLiveWorkshops(): Promise<Workshop[]> {
       const title = col(r, "Workshop title");
       const totalSeats = parseInt(col(r, "Seats left").replace(/[^\d]/g, "") || "0", 10);
       const registered = regCounts.get(title.toLowerCase().trim()) ?? 0;
+      const dateStr = col(r, "Date");
+      const timeStr = col(r, "Time");
+      const dateObj = parseDateTime(dateStr, timeStr);
+
+      // Determine status: use sheet status if live/upcoming, otherwise compute from date
+      let status: "live" | "upcoming" | "expired";
+      if (statusRaw === "live") {
+        status = "live";
+      } else if (statusRaw === "upcoming") {
+        status = "upcoming";
+      } else if (dateObj) {
+        status = dateObj < now ? "expired" : "upcoming";
+      } else {
+        status = "upcoming";
+      }
+
       return {
         id: `ws-${i}`,
         title,
@@ -140,7 +198,24 @@ export async function fetchLiveWorkshops(): Promise<Workshop[]> {
         fee: parseInt(col(r, "Price (INR)").replace(/[^\d]/g, "") || "0", 10),
         poster: imageRaw ? toDirectUrl(imageRaw) : undefined,
         registrationLink: regLink || undefined,
-        status: statusRaw === "live" ? "live" : "upcoming",
+        status,
+        date: dateStr || undefined,
+        time: timeStr || undefined,
+        dateObj,
       };
+    })
+    // Sort: live first, then upcoming by nearest date, then expired
+    .sort((a, b) => {
+      const statusOrder = { live: 0, upcoming: 1, expired: 2 };
+      const aOrder = statusOrder[a.status];
+      const bOrder = statusOrder[b.status];
+      if (aOrder !== bOrder) return aOrder - bOrder;
+      // For upcoming, sort by nearest date
+      if (a.status === "upcoming" && b.status === "upcoming" && a.dateObj && b.dateObj) {
+        return a.dateObj.getTime() - b.dateObj.getTime();
+      }
+      return 0;
     });
+
+  return workshops;
 }
