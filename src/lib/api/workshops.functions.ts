@@ -27,22 +27,19 @@ function col(row: Record<string, string>, key: string): string {
 
 // Handles multiple Google Drive URL formats and converts to direct image URLs
 // that work in <img> tags (avoiding ORB blocking).
-// Supported formats:
+// - drive.google.com/thumbnail and /uc redirect with Content-Type: application/binary
+//   + nosniff, so <img> is blocked by net::ERR_BLOCKED_BY_ORB even though bytes are valid.
+// - lh3.googleusercontent.com/d/ID=sW is the only ORB-safe form.
+// Supported inputs:
 // - https://drive.google.com/file/d/FILE_ID/view
 // - https://drive.google.com/open?id=FILE_ID
-// - https://drive.google.com/uc?id=FILE_ID
-// - https://drive.google.com/uc?export=view&id=FILE_ID
+// - https://drive.google.com/uc?id=FILE_ID / uc?export=view&id=FILE_ID
 // - https://lh3.googleusercontent.com/... (already direct)
 function toDirectUrl(url: string): string {
-  // Already a direct lh3 URL
   if (url.includes("lh3.googleusercontent.com")) return url;
-
   const fileId = url.match(/\/file\/d\/([^/?]+)/)?.[1] ?? url.match(/[?&]id=([^&]+)/)?.[1];
-
   if (!fileId) return url;
-
-  // Use uc?export=view which works for all Drive file ID formats
-  return `https://drive.google.com/uc?export=view&id=${fileId}`;
+  return `https://lh3.googleusercontent.com/d/${fileId}=s800`;
 }
 
 function parseDateTime(dateStr: string, timeStr: string): Date | undefined {
