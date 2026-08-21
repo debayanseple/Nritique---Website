@@ -19,7 +19,7 @@ function doPost(e) {
       sheetName = "Workshops";
     }
 
-    var ss = SpreadsheetApp.getActiveSpreadsheet();
+    var ss = SpreadsheetApp.openById("1qvO_SxYVCB4ahy0lpj9hTH4O2skgWGWoZCpL7WaXE8k");
     var sheet = ss.getSheetByName(sheetName);
 
     // Create sheet and headers if they don't exist
