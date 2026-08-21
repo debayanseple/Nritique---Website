@@ -71,14 +71,16 @@ export function Navbar() {
         </ul>
 
         <div className="flex items-center gap-2 sm:gap-3">
-          <Link
-            to="/workshops"
-            className={`inline-flex items-center rounded-md bg-gold px-3 py-1.5 sm:px-4 sm:py-2 text-xs sm:text-sm font-semibold text-charcoal hover:bg-gold/90 transition border border-gold/60 ${
-              open ? "hidden" : ""
-            }`}
-          >
-            Register
-          </Link>
+          {pathname !== "/workshops" && (
+            <Link
+              to="/workshops"
+              className={`inline-flex items-center rounded-md bg-gold px-3 py-1.5 sm:px-4 sm:py-2 text-xs sm:text-sm font-semibold text-charcoal hover:bg-gold/90 transition border border-gold/60 ${
+                open ? "hidden" : ""
+              }`}
+            >
+              Register
+            </Link>
+          )}
           <button
             className="md:hidden min-w-[44px] min-h-[44px] flex items-center justify-center text-burgundy"
             onClick={() => setOpen(!open)}
