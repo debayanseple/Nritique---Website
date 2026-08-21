@@ -15,13 +15,11 @@ export function Contact() {
     setError(null);
     try {
       const res = await submitRegistration({
-        data: {
-          type: "enquiry",
-          name: form.name,
-          email: form.email,
-          phone: form.phone,
-          message: form.message,
-        },
+        type: "enquiry",
+        name: form.name,
+        email: form.email,
+        phone: form.phone,
+        message: form.message,
       });
 
       if (res.success) {

@@ -1,4 +1,3 @@
-import { createServerFn } from "@tanstack/react-start";
 import { z } from "zod";
 
 const registerSchema = z.discriminatedUnion("type", [
@@ -35,54 +34,53 @@ const registerSchema = z.discriminatedUnion("type", [
 
 export type RegistrationInput = z.infer<typeof registerSchema>;
 
-export const submitRegistration = createServerFn({ method: "POST" })
-  .validator(registerSchema)
-  .handler(async ({ data }) => {
-    const googleScriptUrl = process.env.GOOGLE_SCRIPT_URL;
+export async function submitRegistration(
+  data: RegistrationInput,
+): Promise<{ success: boolean; error?: string; warning?: string }> {
+  const googleScriptUrl = import.meta.env.VITE_GOOGLE_SCRIPT_URL;
 
-    if (!googleScriptUrl || googleScriptUrl.trim() === "") {
-      console.warn(
-        "GOOGLE_SCRIPT_URL is not configured. Simulating successful registration for data:",
-        data,
-      );
+  if (!googleScriptUrl || googleScriptUrl.trim() === "") {
+    console.warn(
+      "GOOGLE_SCRIPT_URL is not configured. Simulating successful registration for data:",
+      data,
+    );
 
-      // Simulate delay for realism in development
-      await new Promise((resolve) => setTimeout(resolve, 1000));
-      return {
-        success: true,
-        warning:
-          "Developer Mode: GOOGLE_SCRIPT_URL not configured. Form was processed in simulation mode.",
-      };
+    await new Promise((resolve) => setTimeout(resolve, 1000));
+    return {
+      success: true,
+      warning:
+        "Developer Mode: GOOGLE_SCRIPT_URL not configured. Form was processed in simulation mode.",
+    };
+  }
+
+  try {
+    console.log(`Submitting ${data.type} registration to Google Apps Script Web App...`);
+    const response = await fetch(googleScriptUrl, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    });
+
+    if (!response.ok) {
+      throw new Error(`Google Apps Script responded with HTTP ${response.status}`);
     }
 
-    try {
-      console.log(`Submitting ${data.type} registration to Google Apps Script Web App...`);
-      const response = await fetch(googleScriptUrl, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(data),
-      });
+    const resData = await response.json();
 
-      if (!response.ok) {
-        throw new Error(`Google Apps Script responded with HTTP ${response.status}`);
-      }
-
-      const resData = await response.json();
-
-      if (resData.status === "error") {
-        throw new Error(resData.message || "Failed to process registration inside Apps Script");
-      }
-
-      return { success: true };
-    } catch (error: unknown) {
-      console.error("Error submitting registration to Google Sheets:", error);
-      const errorMessage =
-        error instanceof Error ? error.message : "An unexpected error occurred during registration";
-      return {
-        success: false,
-        error: errorMessage,
-      };
+    if (resData.status === "error") {
+      throw new Error(resData.message || "Failed to process registration inside Apps Script");
     }
-  });
+
+    return { success: true };
+  } catch (error: unknown) {
+    console.error("Error submitting registration to Google Sheets:", error);
+    const errorMessage =
+      error instanceof Error ? error.message : "An unexpected error occurred during registration";
+    return {
+      success: false,
+      error: errorMessage,
+    };
+  }
+}

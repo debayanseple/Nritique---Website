@@ -41,17 +41,15 @@ export function ClassRegisterModal({ batch, onClose }: Props) {
     setError(null);
     try {
       const res = await submitRegistration({
-        data: {
-          type: "class",
-          student: form.student,
-          age: form.age,
-          parent: isMinor ? form.parent : undefined,
-          email: form.email,
-          phone: form.phone,
-          level: form.level,
-          startDate: form.startDate,
-          batchName: batch?.name ?? "",
-        },
+        type: "class",
+        student: form.student,
+        age: form.age,
+        parent: isMinor ? form.parent : undefined,
+        email: form.email,
+        phone: form.phone,
+        level: form.level,
+        startDate: form.startDate,
+        batchName: batch?.name ?? "",
       });
 
       if (res.success) {

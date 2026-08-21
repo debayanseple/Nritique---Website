@@ -33,16 +33,14 @@ export function WorkshopRegisterModal({ workshop, onClose, onReserve }: Props) {
     setError(null);
     try {
       const res = await submitRegistration({
-        data: {
-          type: "workshop",
-          name: form.name,
-          email: form.email,
-          phone: form.phone,
-          level: form.level,
-          workshopTitle: workshop.title,
-          fee: workshop.fee,
-          format: workshop.mode,
-        },
+        type: "workshop",
+        name: form.name,
+        email: form.email,
+        phone: form.phone,
+        level: form.level,
+        workshopTitle: workshop.title,
+        fee: workshop.fee,
+        format: workshop.mode,
       });
 
       if (res.success) {

@@ -195,6 +195,15 @@ function doPost(e) {
   }
 }
 
+function doOptions(e) {
+  return ContentService.createTextOutput("").setMimeType(ContentService.MimeType.TEXT).setHeaders({
+    "Access-Control-Allow-Origin": "*",
+    "Access-Control-Allow-Methods": "POST, OPTIONS",
+    "Access-Control-Allow-Headers": "Content-Type",
+    "Access-Control-Max-Age": "3600",
+  });
+}
+
 function createJsonResponse(obj) {
   return ContentService.createTextOutput(JSON.stringify(obj)).setMimeType(
     ContentService.MimeType.JSON,
