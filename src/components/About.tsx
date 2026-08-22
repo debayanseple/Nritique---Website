@@ -73,6 +73,8 @@ export function About() {
             <img
               src="/images/founder image.jpg"
               alt="Srijita Baidya — Founder"
+              loading="lazy"
+              decoding="async"
               className="w-full h-full object-cover"
             />
           </div>

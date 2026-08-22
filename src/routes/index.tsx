@@ -24,6 +24,17 @@ export const Route = createFileRoute("/")({
         content: "Where tradition meets expression — classes & workshops for every age.",
       },
     ],
+    links: [
+      // Hero logo is the LCP element on this route — start fetching it during HTML parse.
+      {
+        rel: "preload",
+        href: "/images/Full-logo.webp",
+        as: "image",
+        fetchPriority: "high",
+      },
+      { rel: "preconnect", href: "https://lh3.googleusercontent.com" },
+      { rel: "preconnect", href: "https://docs.google.com" },
+    ],
   }),
   component: Index,
 });

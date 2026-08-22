@@ -121,6 +121,8 @@ export function Workshops() {
                     <img
                       src={w.poster}
                       alt={`${w.title} poster`}
+                      loading="lazy"
+                      decoding="async"
                       className={`w-full h-full object-cover ${
                         w.status === "upcoming"
                           ? "opacity-50"

@@ -41,6 +41,9 @@ export function Hero() {
         <motion.img
           src="/images/Full-logo.webp"
           alt="Nritya Dance Academy"
+          loading="eager"
+          fetchPriority="high"
+          decoding="async"
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 1, ease: "easeOut" }}

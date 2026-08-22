@@ -1,3 +1,4 @@
+import { useMemo } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { motion } from "framer-motion";
 import { Ornament } from "./Ornament";
@@ -22,14 +23,16 @@ export function Gallery() {
     staleTime: 60 * 1000,
   });
 
-  const baseItems = workshops.map((w, i) => ({
-    workshopName: w.title,
-    color: COLORS[i % COLORS.length],
-    rotate: ROTATIONS[i % ROTATIONS.length],
-    poster: w.poster,
-  }));
-
-  const items = baseItems.length > 0 ? [...baseItems, ...baseItems] : [];
+  const items = useMemo(() => {
+    const baseItems = workshops.map((w, i) => ({
+      workshopName: w.title,
+      color: COLORS[i % COLORS.length],
+      rotate: ROTATIONS[i % ROTATIONS.length],
+      poster: w.poster,
+    }));
+    // Duplicate the set so the -50% marquee loop is seamless.
+    return baseItems.length > 0 ? [...baseItems, ...baseItems] : [];
+  }, [workshops]);
 
   return (
     <section id="gallery" className="py-16 sm:py-24 bg-cream overflow-hidden relative">
@@ -77,6 +80,8 @@ export function Gallery() {
                 <img
                   src={g.poster}
                   alt={g.workshopName}
+                  loading="lazy"
+                  decoding="async"
                   className="absolute inset-0 w-full h-full object-cover"
                 />
               )}

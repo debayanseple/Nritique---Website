@@ -19,6 +19,11 @@ export const Route = createFileRoute("/workshops")({
         content: "Reserve your spot in our upcoming Kathak workshops — both online and in-studio.",
       },
     ],
+    links: [
+      // Poster images and sheet data come from these origins on this route.
+      { rel: "preconnect", href: "https://lh3.googleusercontent.com" },
+      { rel: "preconnect", href: "https://docs.google.com" },
+    ],
   }),
   component: WorkshopsPage,
 });
